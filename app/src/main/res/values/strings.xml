@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">ExerTime</string>
+    <string name="dateButton">Next Exercise and Time</string>
+    <string name="dateSTR">Date</string>
+    <string name="exerciseSTR">Exercises</string>
+    <string name="scoreSTR">Today\'s Score</string>
+    <string name="profileSTR">profile</string>
+    <string name="recordsSTR">My Records</string>
+    <string name="signInGoogle">Sign in with Google</string>
+    <string name="NotiSTR">notification</string>
+    <string name="notiButton">Notify Me</string>
+    <string name="nextExercise">Next scheduled exercise</string>
+    <string name="exerciseNext">Next Scheduled Exercise</string>
+    <string name="title_activity_next_exercise">nextExercise</string>
+    <string name="scheduledExercise">Next Scheduled Exercise</string>
+    <string name="protext">My Profile</string>
+    <string name="scoretitle">Today\'s Score</string>
+    <string name="notification">Notification</string>
+    <string name="scoretext">My Score</string>
+    <string name="nameTi">Name</string>
+    <string name="name">Name</string>
+    <string name="scehduleButton">Generate Schedule</string>
+    <string name="goalTitle">Goal</string>
+</resources>
