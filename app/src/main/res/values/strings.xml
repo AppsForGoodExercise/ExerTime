@@ -23,4 +23,8 @@
     <string name="goalTitle">Goal</string>
     <string name="goalheading">Goal</string>
     <string name="nameHeading">Name</string>
+    <string name="AddScore">Finished an Exercise</string>
+    <string name="FinishedAnExercise">Finished an Exercise</string>
+    <string name="scoreString" />
+    <string name="scoreValue">Score:</string>
 </resources>

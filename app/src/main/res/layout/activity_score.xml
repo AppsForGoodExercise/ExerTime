@@ -11,13 +11,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="236dp"
-        android:layout_marginRight="236dp"
         android:layout_marginTop="52dp"
         android:text="@string/scoretext"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="236dp" />
+
+    <Button
+        android:id="@+id/addScoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="115dp"
+        android:onClick="addScore"
+        android:text="@string/FinishedAnExercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
+
+    <TextView
+        android:id="@+id/returnScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="54dp"
+        android:layout_marginTop="106dp"
+        android:text="@string/scoreValue"
+        app:layout_constraintEnd_toEndOf="@+id/addScoreButton"
+        app:layout_constraintTop_toBottomOf="@+id/addScoreButton"
+        android:layout_marginRight="54dp" />
 
 
 </android.support.constraint.ConstraintLayout>

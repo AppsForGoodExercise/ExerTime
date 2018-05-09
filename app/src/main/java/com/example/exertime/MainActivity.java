@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -62,9 +63,12 @@ public class MainActivity extends Activity
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
-    private static final String BUTTON_TEXT = "Call Google Calendar API";
+    private static final String BUTTON_TEXT = "Generate Schedule";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
+
+    ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
+    List<String> eventStrings = new ArrayList<String>();
 
     /**
      * Create the main activity.
@@ -322,6 +326,7 @@ public class MainActivity extends Activity
      * An asynchronous task that handles the Google Calendar API call.
      * Placing the API calls in their own task ensures the UI stays responsive.
      */
+    //--Everything for funtionality has to happen in this method
     private class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
         private com.google.api.services.calendar.Calendar mService = null;
         private Exception mLastError = null;
@@ -343,6 +348,7 @@ public class MainActivity extends Activity
         protected List<String> doInBackground(Void... params) {
             try {
                 return getDataFromApi();
+                //--return the stuff from robert's code here instead, or put his stuff into the method
             } catch (Exception e) {
                 mLastError = e;
                 cancel(true);
@@ -359,7 +365,6 @@ public class MainActivity extends Activity
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             DateTime endofhrs = new DateTime((System.currentTimeMillis()/(1000*60*60*24) + 1)*(1000*60*60*24)+14400000);
-            List<String> eventStrings = new ArrayList<>();
             Events events = mService.events().list("primary")
                     .setTimeMax(endofhrs)
                     .setTimeMin(now)
@@ -386,6 +391,8 @@ public class MainActivity extends Activity
                 eventStrings.add(startingtime);
                 eventStrings.add(endingtime);
             }
+
+            makeBusyEvents(eventStrings);
             return eventStrings;
         }
 
@@ -397,6 +404,7 @@ public class MainActivity extends Activity
             mProgress.show();
         }
 
+        //--Change this method?
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
@@ -429,4 +437,26 @@ public class MainActivity extends Activity
             }
         }
     }
+
+    //Added
+    public void makeBusyEvents(List<String> eventStrings2){
+        int start = 0000;
+        int stop = 0000;
+
+        for(int i=0; i<eventStrings2.size(); i=i+2){
+            start = Integer.parseInt(eventStrings2.get(i));
+            stop = Integer.parseInt(eventStrings2.get(i+1));
+            OurEvent oe = new OurEvent(start, stop);
+            busyEvents.add(oe);
+        }
+
+        Log.d("MainActiviy", "made busy events");
+
+    }
+
+    public ArrayList<OurEvent> getBusyEvents(){
+        return busyEvents;
+    }
+
+    //--Add Robert's methods here?
 }
