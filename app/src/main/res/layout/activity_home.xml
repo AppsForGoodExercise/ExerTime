@@ -18,24 +18,14 @@
         android:background="#FFB74D"
         android:onClick="hamburger"
         android:text="@string/scehduleButton"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
-
-
-
-
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
-
-
     ]]>
-
     <Button
         android:id="@+id/profileButton"
         android:layout_width="wrap_content"
@@ -45,6 +35,8 @@
         android:layout_marginRight="128dp"
         android:background="#FFB74D"
         android:text="@string/profileSTR"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -58,6 +50,8 @@
         android:layout_marginStart="84dp"
         android:background="#FFB74D"
         android:text="@string/scoretitle"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
