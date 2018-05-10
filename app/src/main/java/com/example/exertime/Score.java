@@ -20,7 +20,7 @@ public class Score extends AppCompatActivity {
     public void addScore(View v){
         scoreVal++;
         TextView scoreText = findViewById(R.id.returnScore);
-        scoreText.setText("Your Score: " + scoreVal);
+        scoreText.setText("My Streak: " + scoreVal);
 
     }
 

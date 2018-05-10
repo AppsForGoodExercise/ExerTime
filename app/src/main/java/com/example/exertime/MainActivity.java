@@ -55,6 +55,8 @@ public class MainActivity extends Activity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
+    private TextView mYourSchedule;
+    private TextView mExerciseText;
     private Button mCallApiButton;
     ProgressDialog mProgress;
 
@@ -68,7 +70,8 @@ public class MainActivity extends Activity
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
     ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
-    List<String> eventStrings = new ArrayList<String>();
+    //--variable for entire day?
+    ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
 
     /**
      * Create the main activity.
@@ -108,8 +111,31 @@ public class MainActivity extends Activity
         mOutputText.setVerticalScrollBarEnabled(true);
         mOutputText.setMovementMethod(new ScrollingMovementMethod());
         mOutputText.setText(
-                "Click the \'" + BUTTON_TEXT +"\' button to generate your schedule.");
+                "Click the \'" + BUTTON_TEXT +"\' button to generate your schedule for today.");
         activityLayout.addView(mOutputText);
+
+        mYourSchedule = new TextView(this);
+        mYourSchedule.setLayoutParams(tlp);
+        mYourSchedule.setPadding(16, 16, 16, 16);
+        mYourSchedule.setVerticalScrollBarEnabled(true);
+        mYourSchedule.setMovementMethod(new ScrollingMovementMethod());
+        mYourSchedule.setText(
+                "Your exercise schedule: ");
+        activityLayout.addView(mYourSchedule);
+
+        //--reading and --print (most of it)
+        //--set text to stuff from text file or database
+        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
+        //if not empty, set text to thestrings from the file
+        //--Have another method for this below and call it?
+        mExerciseText = new TextView(this);
+        mExerciseText.setLayoutParams(tlp);
+        mExerciseText.setPadding(16, 16, 16, 16);
+        mExerciseText.setVerticalScrollBarEnabled(true);
+        mExerciseText.setMovementMethod(new ScrollingMovementMethod());
+        mExerciseText.setText(
+                "");
+        activityLayout.addView(mExerciseText);
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Calling Google Calendar API ...");
@@ -326,7 +352,7 @@ public class MainActivity extends Activity
      * An asynchronous task that handles the Google Calendar API call.
      * Placing the API calls in their own task ensures the UI stays responsive.
      */
-    //--Everything for funtionality has to happen in this method
+    //--Everything for functionality has to happen in this method
     private class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
         private com.google.api.services.calendar.Calendar mService = null;
         private Exception mLastError = null;
@@ -348,7 +374,6 @@ public class MainActivity extends Activity
         protected List<String> doInBackground(Void... params) {
             try {
                 return getDataFromApi();
-                //--return the stuff from robert's code here instead, or put his stuff into the method
             } catch (Exception e) {
                 mLastError = e;
                 cancel(true);
@@ -362,9 +387,11 @@ public class MainActivity extends Activity
          * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
-            // List the next 10 events from the primary calendar.
+            // List all event from now to midnight the next day from primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             DateTime endofhrs = new DateTime((System.currentTimeMillis()/(1000*60*60*24) + 1)*(1000*60*60*24)+14400000);
+            List<String> eventStrings = new ArrayList<String>();
+            List<Integer> busyTimes = new ArrayList<Integer>();
             Events events = mService.events().list("primary")
                     .setTimeMax(endofhrs)
                     .setTimeMin(now)
@@ -377,22 +404,26 @@ public class MainActivity extends Activity
                 String start = event.getStart().getDateTime().toStringRfc3339();
                 String end = event.getEnd().getDateTime().toStringRfc3339();
 
-                String startingtime = start.substring(11,17).replace(":","");
-                String endingtime = end.substring(11,17).replace(":","");
+                String formattedstart = start.substring(11,16);
+                String formattedend = end.substring(11,16);
+
+                String startingtime = start.substring(11,16).replace(":","");
+                String endingtime = end.substring(11,16).replace(":","");
 
                 int startInt = Integer.parseInt(startingtime);
-                int endInt = Integer.parseInt(endingtime);
+                int stopInt = Integer.parseInt(endingtime);
 
                 if (start == null) {
                     // All-day events don't have start times, so just use
                     // the start date.
                     start = event.getStart().getDate().toStringRfc3339();
                 }
-                eventStrings.add(startingtime);
-                eventStrings.add(endingtime);
+                eventStrings.add(
+                        String.format("%s: %s - %s", event.getSummary(), formattedstart, formattedend));
+                busyTimes.add(startInt);
+                busyTimes.add(stopInt);
             }
-
-            makeBusyEvents(eventStrings);
+            makeBusyEvents(busyTimes);
             return eventStrings;
         }
 
@@ -402,18 +433,25 @@ public class MainActivity extends Activity
         protected void onPreExecute() {
             mOutputText.setText("");
             mProgress.show();
+
+            mYourSchedule.setText("");
         }
 
-        //--Change this method?
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
             if (output == null || output.size() == 0) {
                 mOutputText.setText("No results returned.");
             } else {
-                output.add(0, "Data retrieved using the Google Calendar API:");
+                output.add(0, "The current events from your Google Calendar:");
                 mOutputText.setText(TextUtils.join("\n", output));
             }
+
+            mYourSchedule.setText("Your Exercise Schedule:");
+
+            //--print (straight from button)
+            //--set mOutputText3 to getListofEvents (print each value)
+            mExerciseText.setText("woooooooooooo");
         }
 
         @Override
@@ -438,25 +476,61 @@ public class MainActivity extends Activity
         }
     }
 
-    //Added
-    public void makeBusyEvents(List<String> eventStrings2){
+    public void makeBusyEvents(List<Integer> eventInts){
         int start = 0000;
         int stop = 0000;
+        ArrayList<OurEvent> tempList = new ArrayList<OurEvent>();
 
-        for(int i=0; i<eventStrings2.size(); i=i+2){
-            start = Integer.parseInt(eventStrings2.get(i));
-            stop = Integer.parseInt(eventStrings2.get(i+1));
+        for(int i=0; i<eventInts.size(); i=i+2){
+            start = eventInts.get(i);
+            stop = eventInts.get(i+1);
             OurEvent oe = new OurEvent(start, stop);
-            busyEvents.add(oe);
+            tempList.add(oe);
+        }
+
+        for(int i=0; i<tempList.size(); i++){
+            busyEvents.add(i, tempList.get(i));
         }
 
         Log.d("MainActiviy", "made busy events");
 
+        for(int i=0; i<busyEvents.size(); i++){
+            Log.i("BusyEvent", Integer.toString(busyEvents.get(i).getstarttime()));
+
+        }
     }
 
-    public ArrayList<OurEvent> getBusyEvents(){
+    public List<OurEvent> getBusyEvents(){
         return busyEvents;
     }
 
-    //--Add Robert's methods here?
+    public void makeListofEvents(){
+
+        //--Robert's code
+        //reference getBusyEvents
+        //save to a temporary variable
+        //transfer info in temporary variable to day variable here
+        //save events into a data base or file here
+
+    }
+
+    public void getListofEvents(){
+
+        //Robert had code?
+        //--make temporary string list
+        //use class day variable
+        //find exercise events (not emptry strings)
+        //put name of exercise, and times into an array list (created here)
+        //DO NOT RETURN FIFTEEN MINUTE ZONES
+        //RETURN A STRING WITH THE EXERCISES AND TIMES
+        //if notifications need an array of times, take this array and read each element from back to get times
+        //--return array list of strings with exercises
+
+    }
+
+    public void getListFromFile(){
+        //--read and --print (more like return to be printed)
+        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
+        //if not empty, return a list of strings to be printed in the onCreate method
+    }
 }

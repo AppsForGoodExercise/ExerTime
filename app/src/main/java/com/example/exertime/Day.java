@@ -15,8 +15,7 @@ public class Day {
     public List<Exercise> masterlist;
     public List<fifteenminutezone> fifteens = new ArrayList<fifteenminutezone>();
 
-
-    public Day(){
+    public Day() {
 
     }
 
