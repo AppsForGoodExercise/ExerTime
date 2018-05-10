@@ -28,4 +28,6 @@
     <string name="scoreString" />
     <string name="scoreValue">My Streak: 0</string>
     <string name="exerList">Exercise List</string>
+    <string name="save">Save</string>
+    <string name="goal">Goal</string>
 </resources>

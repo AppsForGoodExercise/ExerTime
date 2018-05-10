@@ -20,6 +20,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.client.util.DateTime;
 
 import com.google.api.services.calendar.model.*;
+import com.google.api.services.calendar.model.Calendar;
 
 import android.Manifest;
 import android.accounts.AccountManager;
@@ -43,10 +44,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -451,7 +453,10 @@ public class MainActivity extends Activity
 
             //--print (straight from button)
             //--set mOutputText3 to getListofEvents (print each value)
-            mExerciseText.setText("woooooooooooo");
+
+            makeListofEvents();
+            //mExerciseText.setText("boooooooooooo");
+
         }
 
         @Override
@@ -506,7 +511,48 @@ public class MainActivity extends Activity
 
     public void makeListofEvents(){
 
-        //--Robert's code
+        Date g = java.util.Calendar.getInstance().getTime();
+        System.out.println("Current time => " + g);
+
+        Day day = new Day();
+
+        Date date = new Date();   // given date
+        java.util.Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(date);   // assigns calendar to given date
+
+        int x = calendar.get(java.util.Calendar.HOUR_OF_DAY); // gets hour in 24h format
+        calendar.get(java.util.Calendar.HOUR);        // gets hour in 12h format
+        String p = calendar.get(java.util.Calendar.DAY_OF_MONTH)+""+calendar.get(java.util.Calendar.MONTH)+""+calendar.get(java.util.Calendar.YEAR);
+        int y = calendar.get(java.util.Calendar.MINUTE);
+        int numberday = Integer.parseInt(p);
+        //Robert's Code
+        InputStream is = (InputStream) getResources().openRawResource(R.raw.exerciselist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        String line = "";
+        ExerciseMasterList masterlists = new ExerciseMasterList();
+
+        try {
+
+            while ((line = reader.readLine()) != null) {
+                //Split line by ","
+
+                String[] fields = line.split(",");
+                Exercise exercise = new Exercise(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]));
+                masterlists.addexercise(exercise);
+            }
+        } catch (IOException e) {
+            Log.e("MainActivity", "Error reading data from file on line " + line);
+        }
+        for (int r =0; r<masterlists.getmasterlist().size();r++){
+            System.out.println(masterlists.getexercixe(r).getname());
+        }
+
+        mExerciseText.setText(masterlists.getexercixe(4).getname());
+
+        // TAKE OUT BOOOOOOOOOOOO IN BEGINNING
+
+        day = new Day(numberday, busyEvents, masterlists);
         //reference getBusyEvents
         //save to a temporary variable
         //transfer info in temporary variable to day variable here
