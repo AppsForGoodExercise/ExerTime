@@ -128,7 +128,7 @@ public class Home extends AppCompatActivity {
         });
 
 
-        //exercise List button
+       // exercise List button
         Button exerList = findViewById(R.id.exerciseList);
         exerList.setOnClickListener(new View.OnClickListener() {
 

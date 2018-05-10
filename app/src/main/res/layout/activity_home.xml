@@ -12,15 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="259dp"
-        android:layout_marginLeft="183dp"
         android:layout_marginStart="183dp"
+        android:layout_marginLeft="183dp"
         android:layout_marginTop="113dp"
         android:background="#FFB74D"
         android:onClick="hamburger"
+        android:padding="10dp"
         android:text="@string/scehduleButton"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
@@ -34,8 +34,8 @@
         android:layout_marginEnd="128dp"
         android:layout_marginRight="128dp"
         android:background="#FFB74D"
-        android:text="@string/profileSTR"
         android:padding="10dp"
+        android:text="@string/profileSTR"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,11 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="130dp"
-        android:layout_marginLeft="84dp"
         android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
         android:background="#FFB74D"
-        android:text="@string/scoretitle"
         android:padding="10dp"
+        android:text="@string/scoretitle"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,15 +59,16 @@
     <ImageView
         android:id="@+id/progressImage"
         android:layout_width="230dp"
-        android:layout_height="164dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="206dp"
         android:layout_marginEnd="45dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginRight="45dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseList"
         app:srcCompat="@drawable/linechart" />
 
     <ImageView
@@ -94,6 +95,19 @@
         app:layout_constraintStart_toEndOf="@+id/progressImage"
         app:layout_constraintTop_toBottomOf="@+id/dateButton"
         app:srcCompat="@drawable/runningperson" />
+
+    <Button
+        android:id="@+id/exerciseList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="198dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="210dp"
+        android:text="@string/exerList"
+        app:layout_constraintBottom_toTopOf="@+id/progressImage"
+        app:layout_constraintStart_toStartOf="@+id/dateButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     //image url: http://www.clipartpanda.com/categories/run-clipart
 

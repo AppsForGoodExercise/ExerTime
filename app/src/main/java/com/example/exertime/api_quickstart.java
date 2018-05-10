@@ -1,29 +1,7 @@
 package com.example.exertime;
 
-/**
- * Created by snowk on 5/4/2018.
- */
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
-
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.ExponentialBackOff;
-
-import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.client.util.DateTime;
-
-import com.google.api.services.calendar.model.*;
-
 import android.Manifest;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,14 +12,29 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,12 +44,10 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends Activity
+public class api_quickstart extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
-    private TextView mYourSchedule;
-    private TextView mExerciseText;
     private Button mCallApiButton;
     ProgressDialog mProgress;
 
@@ -65,21 +56,16 @@ public class MainActivity extends Activity
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
-    private static final String BUTTON_TEXT = "Generate Schedule";
+    private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
-    ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
-    //--variable for entire day?
-    ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
 
-    /**
-     * Create the main activity.
-     * @param savedInstanceState previously saved instance data.
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         LinearLayout activityLayout = new LinearLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -111,44 +97,19 @@ public class MainActivity extends Activity
         mOutputText.setVerticalScrollBarEnabled(true);
         mOutputText.setMovementMethod(new ScrollingMovementMethod());
         mOutputText.setText(
-                "Click the \'" + BUTTON_TEXT +"\' button to generate your schedule for today.");
+                "Click the \'" + BUTTON_TEXT +"\' button to test the API.");
         activityLayout.addView(mOutputText);
-
-        mYourSchedule = new TextView(this);
-        mYourSchedule.setLayoutParams(tlp);
-        mYourSchedule.setPadding(16, 16, 16, 16);
-        mYourSchedule.setVerticalScrollBarEnabled(true);
-        mYourSchedule.setMovementMethod(new ScrollingMovementMethod());
-        mYourSchedule.setText(
-                "Your exercise schedule: ");
-        activityLayout.addView(mYourSchedule);
-
-        //--reading and --print (most of it)
-        //--set text to stuff from text file or database
-        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
-        //if not empty, set text to thestrings from the file
-        //--Have another method for this below and call it?
-        mExerciseText = new TextView(this);
-        mExerciseText.setLayoutParams(tlp);
-        mExerciseText.setPadding(16, 16, 16, 16);
-        mExerciseText.setVerticalScrollBarEnabled(true);
-        mExerciseText.setMovementMethod(new ScrollingMovementMethod());
-        mExerciseText.setText(
-                "");
-        activityLayout.addView(mExerciseText);
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Calling Google Calendar API ...");
 
-        setContentView(activityLayout);
+        setContentView(R.layout.activity_api_quickstart);
 
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
     }
-
-
 
     /**
      * Attempt to call the API, after verifying that all the preconditions are
@@ -331,7 +292,6 @@ public class MainActivity extends Activity
         }
     }
 
-
     /**
      * Display an error dialog showing that Google Play Services is missing
      * or out of date.
@@ -342,7 +302,7 @@ public class MainActivity extends Activity
             final int connectionStatusCode) {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         Dialog dialog = apiAvailability.getErrorDialog(
-                MainActivity.this,
+                api_quickstart.this,
                 connectionStatusCode,
                 REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
@@ -352,7 +312,6 @@ public class MainActivity extends Activity
      * An asynchronous task that handles the Google Calendar API call.
      * Placing the API calls in their own task ensures the UI stays responsive.
      */
-    //--Everything for functionality has to happen in this method
     private class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
         private com.google.api.services.calendar.Calendar mService = null;
         private Exception mLastError = null;
@@ -362,7 +321,7 @@ public class MainActivity extends Activity
             JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
             mService = new com.google.api.services.calendar.Calendar.Builder(
                     transport, jsonFactory, credential)
-                    .setApplicationName("ExerT!me")
+                    .setApplicationName("Google Calendar API Android Quickstart")
                     .build();
         }
 
@@ -387,13 +346,11 @@ public class MainActivity extends Activity
          * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
-            // List all event from now to midnight the next day from primary calendar.
+            // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
-            DateTime endofhrs = new DateTime((System.currentTimeMillis()/(1000*60*60*24) + 1)*(1000*60*60*24)+14400000);
             List<String> eventStrings = new ArrayList<String>();
-            List<Integer> busyTimes = new ArrayList<Integer>();
             Events events = mService.events().list("primary")
-                    .setTimeMax(endofhrs)
+                    .setMaxResults(10)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
@@ -401,40 +358,23 @@ public class MainActivity extends Activity
             List<Event> items = events.getItems();
 
             for (Event event : items) {
-                String start = event.getStart().getDateTime().toStringRfc3339();
-                String end = event.getEnd().getDateTime().toStringRfc3339();
-
-                String formattedstart = start.substring(11,16);
-                String formattedend = end.substring(11,16);
-
-                String startingtime = start.substring(11,16).replace(":","");
-                String endingtime = end.substring(11,16).replace(":","");
-
-                int startInt = Integer.parseInt(startingtime);
-                int stopInt = Integer.parseInt(endingtime);
-
+                DateTime start = event.getStart().getDateTime();
                 if (start == null) {
                     // All-day events don't have start times, so just use
                     // the start date.
-                    start = event.getStart().getDate().toStringRfc3339();
+                    start = event.getStart().getDate();
                 }
                 eventStrings.add(
-                        String.format("%s: %s - %s", event.getSummary(), formattedstart, formattedend));
-                busyTimes.add(startInt);
-                busyTimes.add(stopInt);
+                        String.format("%s (%s)", event.getSummary(), start));
             }
-            makeBusyEvents(busyTimes);
             return eventStrings;
         }
-
 
 
         @Override
         protected void onPreExecute() {
             mOutputText.setText("");
             mProgress.show();
-
-            mYourSchedule.setText("");
         }
 
         @Override
@@ -443,15 +383,9 @@ public class MainActivity extends Activity
             if (output == null || output.size() == 0) {
                 mOutputText.setText("No results returned.");
             } else {
-                output.add(0, "The current events from your Google Calendar:");
+                output.add(0, "Data retrieved using the Google Calendar API:");
                 mOutputText.setText(TextUtils.join("\n", output));
             }
-
-            mYourSchedule.setText("Your Exercise Schedule:");
-
-            //--print (straight from button)
-            //--set mOutputText3 to getListofEvents (print each value)
-            mExerciseText.setText("woooooooooooo");
         }
 
         @Override
@@ -465,7 +399,7 @@ public class MainActivity extends Activity
                 } else if (mLastError instanceof UserRecoverableAuthIOException) {
                     startActivityForResult(
                             ((UserRecoverableAuthIOException) mLastError).getIntent(),
-                            MainActivity.REQUEST_AUTHORIZATION);
+                            api_quickstart.REQUEST_AUTHORIZATION);
                 } else {
                     mOutputText.setText("The following error occurred:\n"
                             + mLastError.getMessage());
@@ -476,61 +410,4 @@ public class MainActivity extends Activity
         }
     }
 
-    public void makeBusyEvents(List<Integer> eventInts){
-        int start = 0000;
-        int stop = 0000;
-        ArrayList<OurEvent> tempList = new ArrayList<OurEvent>();
-
-        for(int i=0; i<eventInts.size(); i=i+2){
-            start = eventInts.get(i);
-            stop = eventInts.get(i+1);
-            OurEvent oe = new OurEvent(start, stop);
-            tempList.add(oe);
-        }
-
-        for(int i=0; i<tempList.size(); i++){
-            busyEvents.add(i, tempList.get(i));
-        }
-
-        Log.d("MainActiviy", "made busy events");
-
-        for(int i=0; i<busyEvents.size(); i++){
-            Log.i("BusyEvent", Integer.toString(busyEvents.get(i).getstarttime()));
-
-        }
-    }
-
-    public List<OurEvent> getBusyEvents(){
-        return busyEvents;
-    }
-
-    public void makeListofEvents(){
-
-        //--Robert's code
-        //reference getBusyEvents
-        //save to a temporary variable
-        //transfer info in temporary variable to day variable here
-        //save events into a data base or file here
-
-    }
-
-    public void getListofEvents(){
-
-        //Robert had code?
-        //--make temporary string list
-        //use class day variable
-        //find exercise events (not emptry strings)
-        //put name of exercise, and times into an array list (created here)
-        //DO NOT RETURN FIFTEEN MINUTE ZONES
-        //RETURN A STRING WITH THE EXERCISES AND TIMES
-        //if notifications need an array of times, take this array and read each element from back to get times
-        //--return array list of strings with exercises
-
-    }
-
-    public void getListFromFile(){
-        //--read and --print (more like return to be printed)
-        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
-        //if not empty, return a list of strings to be printed in the onCreate method
-    }
-}
+}//What is up people
