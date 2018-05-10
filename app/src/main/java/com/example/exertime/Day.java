@@ -92,14 +92,22 @@ public class Day {
         for (int k = 0; k <= 4; k++) {
             y = randy.nextInt(38) + 40;//NOTE THIS IS WEHRE WE CAN ADD AN ADJUSTMENT
             System.out.println("Exercise set");
+             x = randy.nextInt(listofexercisess.getmasterlist().size());
             if (!fifteens.get(y).isthereanevent() || !fifteens.get(y).isthereanexercisehere()) {
                 System.out.println("Setting an exercise");
                 fifteens.get(y).exercisepresent(true);
                 teen = fifteens.get(y);
                 teen.setexercise(listofexercisess.getexercixe(x));
-            }
+                System.out.println(listofexercisess.getexercixe(x).getname());
+            }else k--;
 
         }
+
+        for (int r =0; r<fifteens.size();r++){
+            if(fifteens.get(r).isthereanexercisehere()){
+        System.out.println(fifteens.get(r).getExercise().getname());}
+        }
+
 
 
     }
