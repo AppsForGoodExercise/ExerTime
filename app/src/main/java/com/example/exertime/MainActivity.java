@@ -72,8 +72,9 @@ public class MainActivity extends Activity
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
     ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
-    //--variable for entire day?
     ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
+    private ArrayList<String> stringData = new ArrayList<String>();
+    private String theSchedule = new String("");
 
     /**
      * Create the main activity.
@@ -499,6 +500,7 @@ public class MainActivity extends Activity
 
         Log.d("MainActiviy", "made busy events");
 
+        //This is just to make sure it works - a tester
         for(int i=0; i<busyEvents.size(); i++){
             Log.i("BusyEvent", Integer.toString(busyEvents.get(i).getstarttime()));
 
@@ -544,33 +546,26 @@ public class MainActivity extends Activity
         } catch (IOException e) {
             Log.e("MainActivity", "Error reading data from file on line " + line);
         }
-        for (int r =0; r<masterlists.getmasterlist().size();r++){
+        /*for (int r =0; r<masterlists.getmasterlist().size();r++){
             System.out.println(masterlists.getexercixe(r).getname());
-        }
+        }*/
 
-        mExerciseText.setText(masterlists.getexercixe(4).getname());
-
-        // TAKE OUT BOOOOOOOOOOOO IN BEGINNING
 
         day = new Day(numberday, busyEvents, masterlists);
-        //reference getBusyEvents
-        //save to a temporary variable
-        //transfer info in temporary variable to day variable here
+        day.makeExerciseList();
+        String title;
+        String time;
+        for (int z=0; z<day.getExerciseList().size(); z++){
+            title = day.getExerciseList().get(z).getTitleofExercise();
+            time = day.getExerciseList().get(z).getStartTimeString();
+            stringData.add(time);
+            stringData.add(title);
+            theSchedule = theSchedule+time+" - "+title+" \n";
+        }
+
+        mExerciseText.setText(theSchedule);
+
         //save events into a data base or file here
-
-    }
-
-    public void getListofEvents(){
-
-        //Robert had code?
-        //--make temporary string list
-        //use class day variable
-        //find exercise events (not emptry strings)
-        //put name of exercise, and times into an array list (created here)
-        //DO NOT RETURN FIFTEEN MINUTE ZONES
-        //RETURN A STRING WITH THE EXERCISES AND TIMES
-        //if notifications need an array of times, take this array and read each element from back to get times
-        //--return array list of strings with exercises
 
     }
 

@@ -11,6 +11,7 @@ public class ExerciseEvent {
 
     private String titleofexercise;
     private int timeofexercisestart;
+    private String startTimeString;
     private int timeofexercisestop;
     Exercise Eventexercise;
     private int dateandtime;
@@ -20,7 +21,11 @@ public class ExerciseEvent {
         timeofexercisestart = timestart;
         timeofexercisestop = timestop;
         dateandtime = date;
+    }
 
+    public ExerciseEvent(String exerName, String timestart){
+        startTimeString = timestart;
+        titleofexercise = exerName;
 
     }
 
@@ -36,4 +41,6 @@ public class ExerciseEvent {
 
         return timeofexercisestop;
     }
+
+    public String getStartTimeString() { return startTimeString; }
 }
