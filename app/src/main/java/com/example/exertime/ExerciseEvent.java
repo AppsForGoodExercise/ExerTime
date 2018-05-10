@@ -21,6 +21,7 @@ public class ExerciseEvent {
         timeofexercisestop = timestop;
         dateandtime = date;
 
+
     }
 
     public String getTitleofExercise() {

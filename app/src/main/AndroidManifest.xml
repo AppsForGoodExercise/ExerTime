@@ -26,6 +26,10 @@
         <activity android:name=".Profile" />
         <activity android:name=".Score" />
         <activity android:name=".notificationActivity"></activity>
+        <activity android:name=".exercisecompleteList" />
+        <activity android:name=".NewExerciseActivity" />
+        <activity android:name=".nextExercise" />
+
     </application>
 
 </manifest>

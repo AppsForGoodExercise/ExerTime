@@ -1,5 +1,4 @@
 package com.example.exertime;
-
 import java.util.ArrayList;
 
 /**
@@ -37,7 +36,7 @@ public class fifteenminutezone {
         return  exerewise;
     }
 
-    public void exercisechange(Exercise r){
+    public void setexercise(Exercise r){
         exerewise  = r;
     }
 }
