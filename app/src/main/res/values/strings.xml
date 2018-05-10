@@ -27,4 +27,5 @@
     <string name="FinishedAnExercise">Finished an Exercise</string>
     <string name="scoreString" />
     <string name="scoreValue">Score:</string>
+    <string name="exerList">Exercise List</string>
 </resources>
