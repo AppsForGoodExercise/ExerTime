@@ -85,6 +85,7 @@ public class Home extends AppCompatActivity {
         //this is disconnected for now
         // Button buttonExercise = findViewById(R.id.notify);
         // Button buttonExercise = findViewById(R.id.notify);
+        //notification button--this is disconnected for now
         //Button buttonExercise = findViewById(R.id.notify);
         //notification button--this is disconnected for now
        /* Button buttonExercise = findViewById(R.id.notify);

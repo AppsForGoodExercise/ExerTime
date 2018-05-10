@@ -30,6 +30,7 @@
         <activity android:name=".NewExerciseActivity" />
         <activity android:name=".nextExercise" />
 
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>
