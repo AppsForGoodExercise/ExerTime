@@ -28,63 +28,49 @@ public class Day {
         Random randy = new Random();
 
 
-        /**if(titlesoe.length==starttimes.length) {
-         for(int p = 0;p<stoptimes.length;p++)
-         for(int i=0;i<=titlesoe.length-1;i++) {
-         Event newevent = new Event(titlesoe[i],starttimes[p],stoptimes[i]);
-         events.add(newevent);
-
-         }
-         }
-
-         //Exercise Generator of list
-         List <Integer> timebetween = new ArrayList<Integer>();
-         if(listofevents.size()==0){
-         timebetween.add(1440);
-         }else if
-         for(int j = 0;j<listofevents.size()-1;j++){
-         timebetween.add(this.timebetweenevents(j));
-         }
-         Random randy = new Random(1);
-
-         for(int j = 0;j<timebetween.size();j++){
-         if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
 
 
-         if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         daysexerices.add(masterlist.get(x));
-
-         }
-         }**/
 
         for (int p = 0; p <= 96; p++) {
             fifteenminutezone fifteener = new fifteenminutezone(p * 15, false, false, null);
             fifteens.add(fifteener);
         }
+        int u;
+        int m;
+        int q;
+        int lengthofevent;
+        int checker=0;
+        int yep=0;
+        for (int h = 0; h <= listofevents.size(); h++){
+            //Convert to minutes
+             u=listofevents.get(h).getstarttime();
+             m=u%60;
+             q=(u/100)*60+m;
+
+
+
+
+             for(int v = 0; v<=15;v--){
+                 if((q-v)%15==0){
+                        fifteens.get((q-v)/15).setevent(true);
+
+                        checker = q-v;
+                        break;
+                 }
+             }
+            lengthofevent=listofevents.get(h).getlengthoftime()/15;
+
+            for(yep=0;yep<=lengthofevent;yep++){
+                fifteens.get((checker)/15+yep).setevent(true);
+            }
+
+
+        }
+
+
+
+
+
 
         int x = randy.nextInt(listofexercisess.getmasterlist().size());
         int y = randy.nextInt(64);
@@ -224,6 +210,10 @@ public class Day {
             else checker = false;}
 
         return checker;
+
+    }
+
+    public void fifteenminutefixers(int start, int end){
 
     }
 
