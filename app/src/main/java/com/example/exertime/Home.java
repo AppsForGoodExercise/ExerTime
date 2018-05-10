@@ -91,8 +91,7 @@ public class Home extends AppCompatActivity {
         day = new Day(numberday, null, masterlists);
 
 
-        //notification button
-        //this is disconnected for now
+        //notification button--this is disconnected for now
         //Button buttonExercise = findViewById(R.id.notify);
         //notification button--this is disconnected for now
        /* Button buttonExercise = findViewById(R.id.notify);
@@ -135,19 +134,16 @@ public class Home extends AppCompatActivity {
         });
 
 
-
+        //notification time
         Calendar c = (Calendar) Calendar.getInstance();
         c.add(Calendar.SECOND, 5);
         startAlarm(c);
     }
 
-
-
     //code for connecting
     public void notificationpopup() {
         Intent noti = new Intent(this, notificationActivity.class);
         startActivity(noti);
-
     }
 
     //connecting profile button
