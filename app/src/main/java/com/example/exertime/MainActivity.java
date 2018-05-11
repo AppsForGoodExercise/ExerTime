@@ -444,7 +444,7 @@ public class MainActivity extends Activity
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
             if (output == null || output.size() == 0) {
-                mOutputText.setText("No results returned.");
+                mOutputText.setText("You have no more events today.");
             } else {
                 output.add(0, "The current events from your Google Calendar:");
                 mOutputText.setText(TextUtils.join("\n", output));
@@ -565,7 +565,7 @@ public class MainActivity extends Activity
 
         mExerciseText.setText(theSchedule);
 
-        //save events into a data base or file here
+        //save theSchedule into file here
 
     }
 
