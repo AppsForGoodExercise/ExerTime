@@ -35,9 +35,11 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -53,7 +55,7 @@ import java.util.*;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends Activity
+public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
@@ -74,7 +76,6 @@ public class MainActivity extends Activity
     ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
     ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
     private ArrayList<String> stringData = new ArrayList<String>();
-    private String theSchedule = new String("");
 
     /**
      * Create the main activity.
@@ -97,6 +98,7 @@ public class MainActivity extends Activity
 
         mCallApiButton = new Button(this);
         mCallApiButton.setText(BUTTON_TEXT);
+        mCallApiButton.setTextSize(17);
         mCallApiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,20 +112,24 @@ public class MainActivity extends Activity
 
         mOutputText = new TextView(this);
         mOutputText.setLayoutParams(tlp);
-        mOutputText.setPadding(16, 16, 16, 16);
+        mOutputText.setPadding(16, 16, 16, 25);
         mOutputText.setVerticalScrollBarEnabled(true);
         mOutputText.setMovementMethod(new ScrollingMovementMethod());
         mOutputText.setText(
                 "Click the \'" + BUTTON_TEXT +"\' button to generate your schedule for today.");
+        mOutputText.setTextSize(17);
+        mOutputText.setLineSpacing(1, 2);
+
         activityLayout.addView(mOutputText);
 
         mYourSchedule = new TextView(this);
         mYourSchedule.setLayoutParams(tlp);
-        mYourSchedule.setPadding(16, 16, 16, 16);
+        mYourSchedule.setPadding(16, 30, 16, 16);
         mYourSchedule.setVerticalScrollBarEnabled(true);
         mYourSchedule.setMovementMethod(new ScrollingMovementMethod());
         mYourSchedule.setText(
                 "Your exercise schedule: ");
+        mYourSchedule.setTextSize(17);
         activityLayout.addView(mYourSchedule);
 
         //--reading and --print (most of it)
@@ -138,6 +144,8 @@ public class MainActivity extends Activity
         mExerciseText.setMovementMethod(new ScrollingMovementMethod());
         mExerciseText.setText(
                 "");
+        mExerciseText.setTextSize(17);
+        mExerciseText.setLineSpacing(1,2);
         activityLayout.addView(mExerciseText);
 
         mProgress = new ProgressDialog(this);
@@ -456,7 +464,6 @@ public class MainActivity extends Activity
             //--set mOutputText3 to getListofEvents (print each value)
 
             makeListofEvents();
-            //mExerciseText.setText("boooooooooooo");
 
         }
 
@@ -514,7 +521,7 @@ public class MainActivity extends Activity
     public void makeListofEvents(){
 
         Date g = java.util.Calendar.getInstance().getTime();
-        System.out.println("Current time => " + g);
+        //System.out.println("Current time => " + g);
 
         Day day = new Day();
 
@@ -546,15 +553,13 @@ public class MainActivity extends Activity
         } catch (IOException e) {
             Log.e("MainActivity", "Error reading data from file on line " + line);
         }
-        /*for (int r =0; r<masterlists.getmasterlist().size();r++){
-            System.out.println(masterlists.getexercixe(r).getname());
-        }*/
 
 
         day = new Day(numberday, busyEvents, masterlists);
         day.makeExerciseList();
         String title;
         String time;
+        String theSchedule = new String("");
         for (int z=0; z<day.getExerciseList().size(); z++){
             title = day.getExerciseList().get(z).getTitleofExercise();
             time = day.getExerciseList().get(z).getStartTimeString();
