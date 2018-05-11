@@ -41,6 +41,7 @@ public class Day {
         int lengthofevent;
         int checker=0;
         int yep=0;
+        if(listofevents!=null){
         for (int h = 0; h <= listofevents.size(); h++){
             //Convert to minutes
              u=listofevents.get(h).getstarttime();
@@ -65,7 +66,7 @@ public class Day {
             }
 
 
-        }
+        }}
 
 
 
