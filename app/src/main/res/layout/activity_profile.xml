@@ -29,23 +29,27 @@
         android:layout_height="0dp"
         android:layout_marginBottom="58dp"
         android:layout_marginEnd="133dp"
-        android:layout_marginRight="133dp"
+        android:layout_marginStart="162dp"
         app:layout_constraintBottom_toTopOf="@+id/nameTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileTitle"
-        app:srcCompat="@drawable/runningperson" />
+        app:srcCompat="@drawable/runningperson"
+        android:layout_marginRight="133dp"
+        android:layout_marginLeft="162dp" />
 
     <TextView
         android:id="@+id/goalTitle"
-        android:layout_width="173dp"
-        android:layout_height="0dp"
+        android:layout_width="66dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="182dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginRight="156dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/goalheading"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTitle" />
 
     <TextView
@@ -53,11 +57,66 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="89dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/nameHeading"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/goalTitle"
-        app:layout_constraintEnd_toEndOf="@+id/profileImage"
-        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <EditText
+        android:id="@+id/enterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="194dp"
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/name"
+        app:layout_constraintBottom_toTopOf="@+id/goalTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTitle"
+        android:layout_marginRight="194dp"
+        android:layout_marginLeft="189dp" />
+
+    <EditText
+        android:id="@+id/enterGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="94dp"
+        android:layout_marginEnd="194dp"
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/goal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalTitle"
+        android:layout_marginRight="194dp"
+        android:layout_marginLeft="189dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="258dp"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="16dp"
+        android:onClick="saveInfo"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterGoal"
+        android:layout_marginRight="258dp"
+        android:layout_marginLeft="255dp" />
 
 </android.support.constraint.ConstraintLayout>

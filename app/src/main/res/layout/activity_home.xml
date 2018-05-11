@@ -9,11 +9,11 @@
 
     <Button
         android:id="@+id/dateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="259dp"
-        android:layout_marginStart="183dp"
-        android:layout_marginLeft="183dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="113dp"
         android:background="#FFB74D"
         android:onClick="hamburger"
@@ -22,6 +22,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,45 +32,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="128dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginRight="128dp"
+        android:layout_marginEnd="115dp"
         android:background="#FFB74D"
         android:padding="10dp"
         android:text="@string/profileSTR"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="115dp" />
 
     <Button
         android:id="@+id/scoreBut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="130dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
+        android:layout_marginStart="115dp"
         android:background="#FFB74D"
         android:padding="10dp"
         android:text="@string/scoretitle"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="115dp" />
 
     <ImageView
         android:id="@+id/progressImage"
         android:layout_width="230dp"
         android:layout_height="0dp"
         android:layout_marginBottom="206dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseList"
-        app:srcCompat="@drawable/linechart" />
+        app:srcCompat="@drawable/linechart"
+        android:layout_marginLeft="50dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -88,25 +86,26 @@
         android:layout_width="148dp"
         android:layout_height="151dp"
         android:layout_marginBottom="183dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginRight="81dp"
+        android:layout_marginStart="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/progressImage"
         app:layout_constraintTop_toBottomOf="@+id/dateButton"
-        app:srcCompat="@drawable/runningperson" />
+        app:srcCompat="@drawable/runningperson"
+        android:layout_marginLeft="80dp" />
 
     <Button
         android:id="@+id/exerciseList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="198dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="210dp"
+        android:layout_width="135dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="183dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="225dp"
         android:text="@string/exerList"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/progressImage"
-        app:layout_constraintStart_toStartOf="@+id/dateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     //image url: http://www.clipartpanda.com/categories/run-clipart

@@ -14,9 +14,9 @@
     <string name="title_activity_next_exercise">nextExercise</string>
     <string name="scheduledExercise">Next Scheduled Exercise</string>
     <string name="protext">My Profile</string>
-    <string name="scoretitle">Today\'s Score</string>
+    <string name="scoretitle">Streak</string>
     <string name="notification">Notification</string>
-    <string name="scoretext">My Score</string>
+    <string name="scoretext">My Streak</string>
     <string name="nameTi">Name</string>
     <string name="name">Name</string>
     <string name="scehduleButton">Generate Schedule</string>
@@ -26,6 +26,8 @@
     <string name="AddScore">Finished an Exercise</string>
     <string name="FinishedAnExercise">Finished an Exercise</string>
     <string name="scoreString" />
-    <string name="scoreValue">My Streak: 0</string>
     <string name="exerList">Exercise List</string>
+    <string name="scoreValue">My Streak: 0</string>
+    <string name="save">Save</string>
+    <string name="goal">Goal</string>
 </resources>

@@ -20,6 +20,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.client.util.DateTime;
 
 import com.google.api.services.calendar.model.*;
+import com.google.api.services.calendar.model.Calendar;
 
 import android.Manifest;
 import android.accounts.AccountManager;
@@ -43,10 +44,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -70,8 +72,9 @@ public class MainActivity extends Activity
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
     ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
-    //--variable for entire day?
     ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
+    private ArrayList<String> stringData = new ArrayList<String>();
+    private String theSchedule = new String("");
 
     /**
      * Create the main activity.
@@ -441,7 +444,7 @@ public class MainActivity extends Activity
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
             if (output == null || output.size() == 0) {
-                mOutputText.setText("No results returned.");
+                mOutputText.setText("You have no more events today.");
             } else {
                 output.add(0, "The current events from your Google Calendar:");
                 mOutputText.setText(TextUtils.join("\n", output));
@@ -451,7 +454,10 @@ public class MainActivity extends Activity
 
             //--print (straight from button)
             //--set mOutputText3 to getListofEvents (print each value)
-            mExerciseText.setText("woooooooooooo");
+
+            makeListofEvents();
+            //mExerciseText.setText("boooooooooooo");
+
         }
 
         @Override
@@ -494,6 +500,7 @@ public class MainActivity extends Activity
 
         Log.d("MainActiviy", "made busy events");
 
+        //This is just to make sure it works - a tester
         for(int i=0; i<busyEvents.size(); i++){
             Log.i("BusyEvent", Integer.toString(busyEvents.get(i).getstarttime()));
 
@@ -506,25 +513,59 @@ public class MainActivity extends Activity
 
     public void makeListofEvents(){
 
-        //--Robert's code
-        //reference getBusyEvents
-        //save to a temporary variable
-        //transfer info in temporary variable to day variable here
-        //save events into a data base or file here
+        Date g = java.util.Calendar.getInstance().getTime();
+        System.out.println("Current time => " + g);
 
-    }
+        Day day = new Day();
 
-    public void getListofEvents(){
+        Date date = new Date();   // given date
+        java.util.Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(date);   // assigns calendar to given date
 
-        //Robert had code?
-        //--make temporary string list
-        //use class day variable
-        //find exercise events (not emptry strings)
-        //put name of exercise, and times into an array list (created here)
-        //DO NOT RETURN FIFTEEN MINUTE ZONES
-        //RETURN A STRING WITH THE EXERCISES AND TIMES
-        //if notifications need an array of times, take this array and read each element from back to get times
-        //--return array list of strings with exercises
+        int x = calendar.get(java.util.Calendar.HOUR_OF_DAY); // gets hour in 24h format
+        calendar.get(java.util.Calendar.HOUR);        // gets hour in 12h format
+        String p = calendar.get(java.util.Calendar.DAY_OF_MONTH)+""+calendar.get(java.util.Calendar.MONTH)+""+calendar.get(java.util.Calendar.YEAR);
+        int y = calendar.get(java.util.Calendar.MINUTE);
+        int numberday = Integer.parseInt(p);
+        //Robert's Code
+        InputStream is = (InputStream) getResources().openRawResource(R.raw.exerciselist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        String line = "";
+        ExerciseMasterList masterlists = new ExerciseMasterList();
+
+        try {
+
+            while ((line = reader.readLine()) != null) {
+                //Split line by ","
+
+                String[] fields = line.split(",");
+                Exercise exercise = new Exercise(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]));
+                masterlists.addexercise(exercise);
+            }
+        } catch (IOException e) {
+            Log.e("MainActivity", "Error reading data from file on line " + line);
+        }
+        /*for (int r =0; r<masterlists.getmasterlist().size();r++){
+            System.out.println(masterlists.getexercixe(r).getname());
+        }*/
+
+
+        day = new Day(numberday, busyEvents, masterlists);
+        day.makeExerciseList();
+        String title;
+        String time;
+        for (int z=0; z<day.getExerciseList().size(); z++){
+            title = day.getExerciseList().get(z).getTitleofExercise();
+            time = day.getExerciseList().get(z).getStartTimeString();
+            stringData.add(time);
+            stringData.add(title);
+            theSchedule = theSchedule+time+" - "+title+" \n";
+        }
+
+        mExerciseText.setText(theSchedule);
+
+        //save theSchedule into file here
 
     }
 

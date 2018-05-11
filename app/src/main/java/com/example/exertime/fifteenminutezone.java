@@ -39,4 +39,9 @@ public class fifteenminutezone {
     public void setexercise(Exercise r){
         exerewise  = r;
     }
+
+
+    public void setevent(boolean r){
+        isthereaneventhere  = r;
+    }
 }

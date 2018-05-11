@@ -14,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import android.widget.EditText;
+
 public class Profile extends AppCompatActivity {
     private static final String FILE_NAME_1 = "name.txt";
     private static final String FILE_NAME_2 = "goal.txt";
@@ -102,5 +104,16 @@ public class Profile extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveInfo(View v){
+        EditText nameText = findViewById(R.id.enterName);
+        String nameString = nameText.toString();
+
+        EditText goalText = findViewById(R.id.enterName);
+        String goalString = goalText.toString();
+
+        //Now, this stuff needs to be saved
+
     }
 }

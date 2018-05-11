@@ -1,5 +1,7 @@
 package com.example.exertime;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,6 +16,7 @@ public class Day {
     public int date;
     public List<Exercise> masterlist;
     public List<fifteenminutezone> fifteens = new ArrayList<fifteenminutezone>();
+    List<ExerciseEvent> daysexerices = new ArrayList<ExerciseEvent>();
 
     public Day() {
 
@@ -23,88 +26,114 @@ public class Day {
 
         events = new ArrayList<OurEvent>();
         events = listofevents;
-        List<ExerciseEvent> daysexerices = new ArrayList<ExerciseEvent>();
 
         Random randy = new Random();
 
 
-        /**if(titlesoe.length==starttimes.length) {
-         for(int p = 0;p<stoptimes.length;p++)
-         for(int i=0;i<=titlesoe.length-1;i++) {
-         Event newevent = new Event(titlesoe[i],starttimes[p],stoptimes[i]);
-         events.add(newevent);
-
-         }
-         }
-
-         //Exercise Generator of list
-         List <Integer> timebetween = new ArrayList<Integer>();
-         if(listofevents.size()==0){
-         timebetween.add(1440);
-         }else if
-         for(int j = 0;j<listofevents.size()-1;j++){
-         timebetween.add(this.timebetweenevents(j));
-         }
-         Random randy = new Random(1);
-
-         for(int j = 0;j<timebetween.size();j++){
-         if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
-         else if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         ExerciseEvent eve = new ExerciseEvent(masterlist.get(x),1400,1400);
-         daysexerices.add(eve);
-
-         }
 
 
-         if(timebetween.get(j)<=15){
-         int x = randy.nextInt(masterlist.size());
-         daysexerices.add(masterlist.get(x));
 
-         }
-         }**/
-
-        for (int p = 0; p <= 96; p++) {
+        for (int p = 0; p < 96; p++) {
             fifteenminutezone fifteener = new fifteenminutezone(p * 15, false, false, null);
             fifteens.add(fifteener);
         }
+
+        int u;
+        int m;
+        int q;
+        int lengthofevent;
+        int checker=0;
+        int yep=0;
+        if(listofevents!=null) {
+            for (int h = 0; h < listofevents.size(); h++) {
+                //Convert to minutes
+                u = listofevents.get(h).getstarttime();
+                m = u % 100;
+                q = (u / 100) * 60 + m;
+
+
+                for (int v = 0; v <= 15; v--) {
+                    if ((q - v) % 15 == 0) {
+                        fifteens.get((q - v) / 15).setevent(true);
+
+                        checker = q - v;
+                        break;
+                    }
+                }
+                lengthofevent = listofevents.get(h).getlengthoftime() / 15;
+
+                for (yep = 0; yep <= lengthofevent; yep++) {
+                    fifteens.get((checker) / 15 + yep).setevent(true);
+                }
+            }
+        }
+
+
+
+
+
 
         int x = randy.nextInt(listofexercisess.getmasterlist().size());
         int y = randy.nextInt(64);
         fifteenminutezone teen;
         for (int k = 0; k <= 4; k++) {
             y = randy.nextInt(38) + 40;//NOTE THIS IS WEHRE WE CAN ADD AN ADJUSTMENT
-            System.out.println("Exercise set");
+            //System.out.println("Exercise set");
+             x = randy.nextInt(listofexercisess.getmasterlist().size());
             if (!fifteens.get(y).isthereanevent() || !fifteens.get(y).isthereanexercisehere()) {
-                System.out.println("Setting an exercise");
+                //System.out.println("Setting an exercise");
                 fifteens.get(y).exercisepresent(true);
                 teen = fifteens.get(y);
                 teen.setexercise(listofexercisess.getexercixe(x));
-            }
+                //System.out.println(listofexercisess.getexercixe(x).getname());
+            }else k--;
 
         }
 
-
     }
 
+    public void makeExerciseList(){
+        for (int r =0; r<fifteens.size();r++){
+            if(fifteens.get(r).isthereanexercisehere()){
+                int zone = r%4;
+                String hr = Integer.toString((r/4)%12);
+                String min;
+                String ampm = "";
+                switch (zone) {
+                    case 0:
+                        min = "00";
+                        break;
+                    case 1:
+                        min = "15";
+                        break;
+                    case 2:
+                        min = "30";
+                        break;
+                    case 3:
+                        min = "45";
+                        break;
+                    default:
+                        min = "00";
+                        break;
+                }
 
+                if ((r/4)>=0 && (r/4)<12)
+                    ampm = "AM";
+                else
+                    ampm = "PM";
+
+                ExerciseEvent exerEvent = new ExerciseEvent(fifteens.get(r).getExercise().getname(), (hr+":"+min+" "+ampm));
+                daysexerices.add(exerEvent);
+
+                System.out.println("At " + hr + ":" + min + " " + ampm);
+                System.out.println(fifteens.get(r).getExercise().getname());
+            }
+        }
+    }
+
+    public List<ExerciseEvent> getExerciseList() {
+        return daysexerices;
+    }
 
     public OurEvent geteventlocation(int location){
         return events.get(location);
@@ -147,13 +176,17 @@ public class Day {
     }
     public String getalltheexercises(){
         String list="";
+
+
         for(int p =0; p<96;p++){
+
+            //This line does not work
             if(fifteens.get(p).isthereanexercisehere()){
-                System.out.println("Hi");
                 list = list+""+fifteens.get(p).getExercise().getname();
             }
 
-        }return list;
+        }
+        return list;
     }
     public String getnextexercise(int time) {
         System.out.println("Getting the next Exercise");
@@ -216,6 +249,10 @@ public class Day {
             else checker = false;}
 
         return checker;
+
+    }
+
+    public void fifteenminutefixers(int start, int end){
 
     }
 
