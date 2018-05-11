@@ -10,26 +10,27 @@
         android:id="@+id/scoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="58dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginRight="216dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
         android:text="@string/scoretext"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addScoreButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:background="#FFB74D"
         android:onClick="addScore"
+        android:padding="10dp"
         android:text="@string/FinishedAnExercise"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +40,31 @@
         android:id="@+id/returnScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="104dp"
-        android:layout_marginRight="104dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/scoreValue"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/addScoreButton"
-        app:layout_constraintTop_toBottomOf="@+id/addScoreButton" />
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="304dp"
+        android:layout_height="311dp"
+        android:layout_marginBottom="41dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/returnScore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addScoreButton"
+        app:srcCompat="@drawable/fire"
+        android:layout_marginLeft="148dp"
+        android:layout_marginRight="149dp" />
+
+    Icons made by "http://www.freepik.com" title="Freepik">Freepik from "https://www.flaticon.com/ is licensed by "http://creativecommons.org/licenses/by/3.0/" "Creative Commons BY 3.0" target="_blank">CC 3.0 BY
 
 </android.support.constraint.ConstraintLayout>

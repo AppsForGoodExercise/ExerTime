@@ -9,14 +9,14 @@ public class Exercise {
     String difficulty;
     private int numberoftimes;
     private  int amountoftime;
-    private int caloric;
+    private int calorie;
 
     public Exercise(String name, String intensity, int reps, int time, int calories){
         title = name;
         difficulty = intensity;
         numberoftimes = reps;
         amountoftime = time;
-        caloric = calories;
+        calorie = calories;
 
     }
 
