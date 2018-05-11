@@ -30,8 +30,8 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         button = (Button) findViewById(R.id.profileButton);
-        mName = findViewById(R.id.editName);
-        mGoal = findViewById(R.id.editGoal);
+        mName = findViewById(R.id.enterName);
+        mGoal = findViewById(R.id.enterGoal);
 
     }
 

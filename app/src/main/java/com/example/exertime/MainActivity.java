@@ -521,7 +521,7 @@ public class MainActivity extends AppCompatActivity
     public void makeListofEvents(){
 
         Date g = java.util.Calendar.getInstance().getTime();
-        System.out.println("Current time => " + g);
+        //System.out.println("Current time => " + g);
 
         Day day = new Day();
 
@@ -553,9 +553,7 @@ public class MainActivity extends AppCompatActivity
         } catch (IOException e) {
             Log.e("MainActivity", "Error reading data from file on line " + line);
         }
-        /*for (int r =0; r<masterlists.getmasterlist().size();r++){
-            System.out.println(masterlists.getexercixe(r).getname());
-        }*/
+
 
         day = new Day(numberday, busyEvents, masterlists);
         day.makeExerciseList();
