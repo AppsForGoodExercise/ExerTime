@@ -29,7 +29,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Date g = Calendar.getInstance().getTime();
-        System.out.println("Current time => " + g);
+        //System.out.println("Current time => " + g);
 
         Date date = new Date();   // given date
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
