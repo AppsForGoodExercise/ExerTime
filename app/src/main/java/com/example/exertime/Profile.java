@@ -105,15 +105,4 @@ public class Profile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    public void saveInfo(View v){
-        EditText nameText = findViewById(R.id.enterName);
-        String nameString = nameText.toString();
-
-        EditText goalText = findViewById(R.id.enterName);
-        String goalString = goalText.toString();
-
-        //Now, this stuff needs to be saved
-
-    }
 }
