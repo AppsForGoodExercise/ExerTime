@@ -45,8 +45,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -76,6 +80,10 @@ public class MainActivity extends AppCompatActivity
     ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
     ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
     private ArrayList<String> stringData = new ArrayList<String>();
+
+    private static final String FILE_NAME_Sc = "schedule.txt";
+    FileInputStream filein_1 = null;
+    String mainTheScText = " ";
 
     /**
      * Create the main activity.
@@ -157,6 +165,8 @@ public class MainActivity extends AppCompatActivity
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
+
+        getListFromFile();
     }
 
 
@@ -415,8 +425,32 @@ public class MainActivity extends AppCompatActivity
                 String start = event.getStart().getDateTime().toStringRfc3339();
                 String end = event.getEnd().getDateTime().toStringRfc3339();
 
-                String formattedstart = start.substring(11,16);
-                String formattedend = end.substring(11,16);
+                String minstart = start.substring(14,16);
+                String minend = end.substring(14,16);
+
+                int hrStartInt = Integer.parseInt(start.substring(11,13));
+                String hrstart = Integer.toString(hrStartInt%12);
+                if(hrstart.equals("0")){
+                    hrstart = "12";
+                }
+
+                int hrEndInt = Integer.parseInt(end.substring(11,13));
+                String hrend = Integer.toString(hrEndInt%12);
+                if(hrend.equals("0")){
+                    hrend = "12";
+                }
+
+                String ampmStart = "";
+                if (hrStartInt>=0 && hrStartInt<12)
+                    ampmStart = "AM";
+                else
+                    ampmStart = "PM";
+
+                String ampmEnd = "";
+                if (hrEndInt>=0 && hrEndInt<12)
+                    ampmEnd = "AM";
+                else
+                    ampmEnd = "PM";
 
                 String startingtime = start.substring(11,16).replace(":","");
                 String endingtime = end.substring(11,16).replace(":","");
@@ -430,7 +464,7 @@ public class MainActivity extends AppCompatActivity
                     start = event.getStart().getDate().toStringRfc3339();
                 }
                 eventStrings.add(
-                        String.format("%s: %s - %s", event.getSummary(), formattedstart, formattedend));
+                        String.format("%s: %s:%s %s - %s:%s %s", event.getSummary(), hrstart, minstart, ampmStart, hrend, minend, ampmEnd));
                 busyTimes.add(startInt);
                 busyTimes.add(stopInt);
             }
@@ -554,7 +588,6 @@ public class MainActivity extends AppCompatActivity
             Log.e("MainActivity", "Error reading data from file on line " + line);
         }
 
-
         day = new Day(numberday, busyEvents, masterlists);
         day.makeExerciseList();
         String title;
@@ -569,14 +602,55 @@ public class MainActivity extends AppCompatActivity
         }
 
         mExerciseText.setText(theSchedule);
+        mainTheScText = theSchedule;
 
-        //save theSchedule into file here
+        save();
+
 
     }
 
+    public void save(){
+        FileOutputStream fileout = null;
+
+        try {
+            fileout = openFileOutput(FILE_NAME_Sc, MODE_PRIVATE);
+            fileout.write(mainTheScText.getBytes());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileout != null) {
+                try {
+                    fileout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void getListFromFile(){
-        //--read and --print (more like return to be printed)
-        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
-        //if not empty, return a list of strings to be printed in the onCreate method
+        FileInputStream filein_1 = null;
+
+        try {
+            filein_1 = openFileInput(FILE_NAME_Sc);
+            InputStreamReader reader = new InputStreamReader(filein_1);
+            BufferedReader buffer = new BufferedReader(reader);
+            StringBuilder sbuilder = new StringBuilder();
+            String text;
+
+            while ((text = buffer.readLine()) != null) {
+                sbuilder.append(text).append("\n");
+            }
+
+            mExerciseText.setText(sbuilder.toString());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -20,6 +20,9 @@ public class Profile extends AppCompatActivity {
     private static final String FILE_NAME_1 = "name.txt";
     private static final String FILE_NAME_2 = "goal.txt";
 
+    FileInputStream filein_1 = null;
+    FileInputStream filein_2 = null;
+
     EditText mName;
     EditText mGoal;
     Button button;
@@ -32,6 +35,8 @@ public class Profile extends AppCompatActivity {
         button = (Button) findViewById(R.id.profileButton);
         mName = findViewById(R.id.enterName);
         mGoal = findViewById(R.id.enterGoal);
+
+        load();
 
     }
 
@@ -67,10 +72,12 @@ public class Profile extends AppCompatActivity {
             }
         }
 
+        load();
+
     }
 
 
-    public void load(View v) {
+    public void load() {
 
         FileInputStream filein_1 = null;
         FileInputStream filein_2 = null;
@@ -105,15 +112,7 @@ public class Profile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    public void saveInfo(View v){
-        EditText nameText = findViewById(R.id.enterName);
-        String nameString = nameText.toString();
-
-        EditText goalText = findViewById(R.id.enterName);
-        String goalString = goalText.toString();
-
-        //Now, this stuff needs to be saved
-
-    }
 }
+
+
+

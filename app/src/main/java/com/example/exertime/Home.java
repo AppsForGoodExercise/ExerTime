@@ -62,8 +62,9 @@ public class Home extends AppCompatActivity {
         for (int r =0; r<masterlists.getmasterlist().size();r++){
             System.out.println(masterlists.getexercixe(r).getname());
         }
-
+        System.out.println("Hi");
         day = new Day(numberday, null, masterlists);
+        System.out.println("Yo");
 
         //notification button
         //this is disconnected for now
