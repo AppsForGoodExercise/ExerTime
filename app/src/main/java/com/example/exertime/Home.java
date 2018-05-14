@@ -29,7 +29,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Date g = Calendar.getInstance().getTime();
-        //System.out.println("Current time => " + g);
+        System.out.println("Current time => " + g);
 
         Date date = new Date();   // given date
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
@@ -62,9 +62,8 @@ public class Home extends AppCompatActivity {
         for (int r =0; r<masterlists.getmasterlist().size();r++){
             System.out.println(masterlists.getexercixe(r).getname());
         }
-        System.out.println("Hi");
+
         day = new Day(numberday, null, masterlists);
-        System.out.println("Yo");
 
         //notification button
         //this is disconnected for now
@@ -125,9 +124,9 @@ public class Home extends AppCompatActivity {
         });
 
 
-        Calendar c = (Calendar) Calendar.getInstance();
+     /*   Calendar c = (Calendar) Calendar.getInstance();
         c.add(Calendar.SECOND, 5);
-        startAlarm(c);
+        startAlarm(c); */
     }
 
 
@@ -212,7 +211,7 @@ public class Home extends AppCompatActivity {
 
     //alarmManager code
 
-    public void startAlarm(Calendar c){
+  /*  public void startAlarm(Calendar c){
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
@@ -220,6 +219,33 @@ public class Home extends AppCompatActivity {
         PendingIntent broadcast = PendingIntent.getBroadcast(this,1,intent,0);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),broadcast);
+
+        //testing
+        //setting time
+        c = (Calendar) Calendar.getInstance();
+       // c.add(Calendar.SECOND, 5);
+        c.set(Calendar.HOUR_OF_DAY,21);
+        c.set(Calendar.MINUTE,02);
+        c.set(Calendar.SECOND,00);
+        startAlarm(c);
+
     }
+    */
+
+  public void startNotification(int startHour, int startMinute){
+      Calendar c = Calendar.getInstance();
+      long rightNow = c.getTimeInMillis();
+      Log.d("noti",String.valueOf(rightNow) );
+
+      AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),8,37,0);
+      long timeToNotify = c.getTimeInMillis();
+      System.out.println("Time: "+timeToNotify);
+
+      Intent intent = new Intent (this,AlarmReceiver.class);
+      PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
+      alarmManager.set(AlarmManager.RTC_WAKEUP,timeToNotify,broadcast);
+  }
 
 }

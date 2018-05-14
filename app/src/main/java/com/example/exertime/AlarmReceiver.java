@@ -37,7 +37,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setPriority(Notification.PRIORITY_MAX);
 
         builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE);
-
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
 
