@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import android.widget.EditText;
@@ -19,6 +20,9 @@ import android.widget.EditText;
 public class Profile extends AppCompatActivity {
     private static final String FILE_NAME_1 = "name.txt";
     private static final String FILE_NAME_2 = "goal.txt";
+
+    FileInputStream filein_1 = null;
+    FileInputStream filein_2 = null;
 
     EditText mName;
     EditText mGoal;
@@ -30,8 +34,36 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         button = (Button) findViewById(R.id.profileButton);
-        mName = findViewById(R.id.enterName);
-        mGoal = findViewById(R.id.enterGoal);
+        mName = findViewById(R.id.editName);
+        mGoal = findViewById(R.id.editGoal);
+
+        try {
+            filein_1 = openFileInput(FILE_NAME_1);
+            InputStreamReader reader = new InputStreamReader(filein_1);
+            BufferedReader buffer = new BufferedReader(reader);
+            StringBuilder sbuilder = new StringBuilder();
+            String text;
+
+            while ((text = buffer.readLine()) != null) {
+                sbuilder.append(text).append("\n");
+            }
+            mName.setText(sbuilder.toString());
+
+            filein_2 = openFileInput(FILE_NAME_2);
+            reader = new InputStreamReader(filein_2);
+            buffer = new BufferedReader(reader);
+            sbuilder = new StringBuilder();
+
+            while ((text = buffer.readLine()) != null) {
+                sbuilder.append(text).append("\n");
+            }
+            mGoal.setText(sbuilder.toString());
+
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
