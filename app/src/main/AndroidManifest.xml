@@ -15,21 +15,38 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Home"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:label="ExerT!me">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Score" />
-        <activity android:name=".notificationActivity"></activity>
-        <activity android:name=".exercisecompleteList" />
-        <activity android:name=".NewExerciseActivity" />
-        <activity android:name=".nextExercise" />
-        <receiver android:name=".AlarmReceiver" />
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Score"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".notificationActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".exercisecompleteList"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewExerciseActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".nextExercise"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

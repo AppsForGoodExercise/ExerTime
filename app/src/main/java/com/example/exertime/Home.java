@@ -27,6 +27,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Date g = Calendar.getInstance().getTime();
         System.out.println("Current time => " + g);
 
@@ -46,17 +47,6 @@ public class Home extends AppCompatActivity {
         String line = "";
         ExerciseMasterList masterlists = new ExerciseMasterList();
 
-
-
-
-
-
-
-
-
-
-
-
         try {
 
             while ((line = reader.readLine()) != null) {
@@ -73,13 +63,7 @@ public class Home extends AppCompatActivity {
             System.out.println(masterlists.getexercixe(r).getname());
         }
 
-
         day = new Day(numberday, null, masterlists);
-
-
-
-
-
 
         //notification button
         //this is disconnected for now
@@ -182,8 +166,6 @@ public class Home extends AppCompatActivity {
         Log.d("Home", "after answer string");
 
         exer.putExtra("NameofExercise", answer);
-
-
 
         startActivity(exer);
     }
