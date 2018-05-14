@@ -18,7 +18,6 @@
             android:label="ExerT!me">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,8 +28,8 @@
         <activity android:name=".exercisecompleteList" />
         <activity android:name=".NewExerciseActivity" />
         <activity android:name=".nextExercise" />
-
         <receiver android:name=".AlarmReceiver" />
+
     </application>
 
 </manifest>
