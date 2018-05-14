@@ -20,7 +20,7 @@
         android:padding="10dp"
         android:text="@string/scehduleButton"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
