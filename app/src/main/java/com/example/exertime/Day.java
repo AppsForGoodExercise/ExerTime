@@ -55,14 +55,14 @@ public class Day {
                 for (int v = 0; v <= 15; v--) {
                     if ((q - v) % 15 == 0) {
                         fifteens.get((q - v) / 15).setevent(true);
-
+                        System.out.print("WAZZUP");
                         checker = q - v;
                         break;
                     }
                 }
                 lengthofevent = listofevents.get(h).getlengthoftime() / 15;
-
-                for (yep = 0; yep <= lengthofevent; yep++) {
+                System.out.println(lengthofevent);
+                for (yep = 0; yep <= lengthofevent+1; yep++) {
                     fifteens.get((checker) / 15 + yep).setevent(true);
                 }
             }
@@ -80,7 +80,7 @@ public class Day {
             y = randy.nextInt(38) + 40;//NOTE THIS IS WEHRE WE CAN ADD AN ADJUSTMENT
             //System.out.println("Exercise set");
              x = randy.nextInt(listofexercisess.getmasterlist().size());
-            if (!fifteens.get(y).isthereanevent() || !fifteens.get(y).isthereanexercisehere()) {
+            if (!fifteens.get(y).isthereanevent() && !fifteens.get(y).isthereanexercisehere()) {
                 //System.out.println("Setting an exercise");
                 fifteens.get(y).exercisepresent(true);
                 teen = fifteens.get(y);
