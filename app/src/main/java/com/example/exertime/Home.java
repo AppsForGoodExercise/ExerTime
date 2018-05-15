@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -45,6 +46,13 @@ public class Home extends AppCompatActivity {
 
         String line = "";
         ExerciseMasterList masterlists = new ExerciseMasterList();
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+
+
+        //alarm times
+        startNotification(12,37);
 
 
 
@@ -253,15 +261,14 @@ public class Home extends AppCompatActivity {
   public void startNotification(int startHour, int startMinute){
       Calendar c = Calendar.getInstance();
       long rightNow = c.getTimeInMillis();
-      Log.d("noti",String.valueOf(rightNow) );
+      Log.d("noti",String.valueOf(rightNow));
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),8,37,0);
+      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
       long timeToNotify = c.getTimeInMillis();
       System.out.println("Time: "+timeToNotify);
-
-      Intent intent = new Intent (this,AlarmReceiver.class);
+      Intent intent = new Intent (this, AlarmReceiver.class);
       PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
       alarmManager.set(AlarmManager.RTC_WAKEUP,timeToNotify,broadcast);
   }
