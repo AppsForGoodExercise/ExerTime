@@ -50,7 +50,7 @@ public class Home extends AppCompatActivity {
 
 
 
-        ArrayList<Integer> hr = new ArrayList<>();
+      /*  ArrayList<Integer> hr = new ArrayList<>();
         ArrayList<Integer> min = new ArrayList<>();
         for (int i=0; i<5; i++) {
             hr.add(12);
@@ -58,24 +58,11 @@ public class Home extends AppCompatActivity {
 
         for (int i=0; i<5; i++){
             min.add(57+i);
-        }
+        } */
 
         //starts the notification at the given times
-        startNotification(hr.get(1),min.get(0));
-        startNotification(hr.get(1),min.get(1));
-        startNotification(hr.get(1),min.get(2));
-
-
-
-
-
-
-
-
-
-
-
-
+        startNotification(8,30);
+        
 
 
 
@@ -160,7 +147,6 @@ public class Home extends AppCompatActivity {
                 exerciseList();
             }
         });
-
     }
 
 
@@ -169,7 +155,6 @@ public class Home extends AppCompatActivity {
     public void notificationpopup() {
         Intent noti = new Intent(this, notificationActivity.class);
         startActivity(noti);
-
     }
     */
 
@@ -266,6 +251,7 @@ public class Home extends AppCompatActivity {
 
     }
     */
+
 //notification code
   public void startNotification(int startHour, int startMinute){
       Calendar c = Calendar.getInstance(); //gets date
