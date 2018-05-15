@@ -19,9 +19,12 @@ public class fifteenminutezone {
         exerewise = g;
 
     }
+
+
     public void exercisepresent(boolean r){
         isthereanexercise  = r;
     }
+
     public boolean isthereanexercisehere(){
         return   isthereanexercise;
     }
@@ -29,6 +32,7 @@ public class fifteenminutezone {
     public boolean isthereanevent(){
         return  isthereaneventhere;
     }
+
     public int gettimestart(){
         return timeofbeginning;
     }

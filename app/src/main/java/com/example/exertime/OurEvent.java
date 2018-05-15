@@ -30,7 +30,7 @@ public class OurEvent {
         int timestartinteger= (timeofeventstart%100)+timeofeventstart/100*60;
         int timestopinteger = (timeofeventstop%100)+timeofeventstop/100*60;
 
-        return timeofeventstop-timeofeventstart;
+        return timestopinteger-timestartinteger;
     }
 
 }

@@ -22,7 +22,6 @@ public class exercisecompleteList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercisecomplete_list);
 
-        //      button = (Button) findViewById(R.id.exerciseList);
 
         Exp_list = (ExpandableListView) findViewById(R.id.exp_ListView);
         Exercise_category = ExerciseData.getInfo();
