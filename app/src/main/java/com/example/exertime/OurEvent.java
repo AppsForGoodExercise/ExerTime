@@ -27,6 +27,9 @@ public class OurEvent {
         return timeofeventstop;
     }
     public int getlengthoftime(){
+        int timestartinteger= (timeofeventstart%100)+timeofeventstart/100*60;
+        int timestopinteger = (timeofeventstop%100)+timeofeventstop/100*60;
+
         return timeofeventstop-timeofeventstart;
     }
 
