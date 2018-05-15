@@ -62,7 +62,7 @@ public class Home extends AppCompatActivity {
 
         //starts the notification at the given times
         startNotification(8,30);
-        
+
 
 
 
@@ -259,6 +259,7 @@ public class Home extends AppCompatActivity {
       Log.d("noti",String.valueOf(rightNow)); //real time
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+      
 
       c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
       long timeToNotify = c.getTimeInMillis();
