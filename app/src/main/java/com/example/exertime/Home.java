@@ -47,12 +47,26 @@ public class Home extends AppCompatActivity {
         String line = "";
         ExerciseMasterList masterlists = new ExerciseMasterList();
 
-        ArrayList<Integer> list = new ArrayList<>();
 
 
 
-        //alarm times
-        startNotification(12,37);
+        ArrayList<Integer> hr = new ArrayList<>();
+        ArrayList<Integer> min = new ArrayList<>();
+        for (int i=0; i<5; i++) {
+            hr.add(12);
+        }
+
+        for (int i=0; i<5; i++){
+            min.add(57+i);
+        }
+
+        //starts the notification at the given times
+        startNotification(hr.get(1),min.get(0));
+        startNotification(hr.get(1),min.get(1));
+        startNotification(hr.get(1),min.get(2));
+
+
+
 
 
 
@@ -147,25 +161,22 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
-     /*   Calendar c = (Calendar) Calendar.getInstance();
-        c.add(Calendar.SECOND, 5);
-        startAlarm(c); */
     }
 
 
-
+/*
     //code for connecting
     public void notificationpopup() {
         Intent noti = new Intent(this, notificationActivity.class);
         startActivity(noti);
 
     }
+    */
 
     //connecting profile button
     public void profile() {
         Intent pro = new Intent(this, Profile.class);
-        startActivity(pro);
+        startActivity(pro); //connects pages
 
     }
 
@@ -191,19 +202,17 @@ public class Home extends AppCompatActivity {
 
         exer.putExtra("NameofExercise", answer);
 
-
-
         startActivity(exer);
     }
 
     public void todayscore() {
         Intent tod = new Intent(this, Score.class);
-        startActivity(tod);
+        startActivity(tod); //connects with two pages
     }
 
     public void exerciseList() {
         Intent exerList= new Intent(this, exercisecompleteList.class);
-        startActivity(exerList);
+        startActivity(exerList); //connects the pages
     }
 
 
@@ -257,11 +266,11 @@ public class Home extends AppCompatActivity {
 
     }
     */
-
+//notification code
   public void startNotification(int startHour, int startMinute){
-      Calendar c = Calendar.getInstance();
-      long rightNow = c.getTimeInMillis();
-      Log.d("noti",String.valueOf(rightNow));
+      Calendar c = Calendar.getInstance(); //gets date
+      long rightNow = c.getTimeInMillis(); //gets the time
+      Log.d("noti",String.valueOf(rightNow)); //real time
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
