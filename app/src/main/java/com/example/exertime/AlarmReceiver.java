@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         //code for popup--> https://www.youtube.com/watch?v=-mW45toHZpg
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentTitle("ExerT!me")
-                .setContentText("Time to exercise!")
+                .setContentText("Time to update your schedule!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setSmallIcon(android.R.drawable.stat_notify_error)

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -27,7 +28,6 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         Date g = Calendar.getInstance().getTime();
         System.out.println("Current time => " + g);
 
@@ -47,6 +47,25 @@ public class Home extends AppCompatActivity {
         String line = "";
         ExerciseMasterList masterlists = new ExerciseMasterList();
 
+
+
+
+      /*  ArrayList<Integer> hr = new ArrayList<>();
+        ArrayList<Integer> min = new ArrayList<>();
+        for (int i=0; i<5; i++) {
+            hr.add(12);
+        }
+
+        for (int i=0; i<5; i++){
+            min.add(57+i);
+        } */
+
+        //starts the notification at the given times
+        startNotification(8,30);
+        
+
+
+
         try {
 
             while ((line = reader.readLine()) != null) {
@@ -63,7 +82,13 @@ public class Home extends AppCompatActivity {
             System.out.println(masterlists.getexercixe(r).getname());
         }
 
+
         day = new Day(numberday, null, masterlists);
+
+
+
+
+
 
         //notification button
         //this is disconnected for now
@@ -122,26 +147,21 @@ public class Home extends AppCompatActivity {
                 exerciseList();
             }
         });
-
-
-     /*   Calendar c = (Calendar) Calendar.getInstance();
-        c.add(Calendar.SECOND, 5);
-        startAlarm(c); */
     }
 
 
-
+/*
     //code for connecting
     public void notificationpopup() {
         Intent noti = new Intent(this, notificationActivity.class);
         startActivity(noti);
-
     }
+    */
 
     //connecting profile button
     public void profile() {
         Intent pro = new Intent(this, Profile.class);
-        startActivity(pro);
+        startActivity(pro); //connects pages
 
     }
 
@@ -172,12 +192,12 @@ public class Home extends AppCompatActivity {
 
     public void todayscore() {
         Intent tod = new Intent(this, Score.class);
-        startActivity(tod);
+        startActivity(tod); //connects with two pages
     }
 
     public void exerciseList() {
         Intent exerList= new Intent(this, exercisecompleteList.class);
-        startActivity(exerList);
+        startActivity(exerList); //connects the pages
     }
 
 
@@ -232,18 +252,18 @@ public class Home extends AppCompatActivity {
     }
     */
 
+//notification code
   public void startNotification(int startHour, int startMinute){
-      Calendar c = Calendar.getInstance();
-      long rightNow = c.getTimeInMillis();
-      Log.d("noti",String.valueOf(rightNow) );
+      Calendar c = Calendar.getInstance(); //gets date
+      long rightNow = c.getTimeInMillis(); //gets the time
+      Log.d("noti",String.valueOf(rightNow)); //real time
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),8,37,0);
+      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
       long timeToNotify = c.getTimeInMillis();
       System.out.println("Time: "+timeToNotify);
-
-      Intent intent = new Intent (this,AlarmReceiver.class);
+      Intent intent = new Intent (this, AlarmReceiver.class);
       PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
       alarmManager.set(AlarmManager.RTC_WAKEUP,timeToNotify,broadcast);
   }
