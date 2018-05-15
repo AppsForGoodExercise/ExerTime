@@ -259,14 +259,13 @@ public class Home extends AppCompatActivity {
       Log.d("noti",String.valueOf(rightNow)); //real time
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-      
-
       c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
       long timeToNotify = c.getTimeInMillis();
       System.out.println("Time: "+timeToNotify);
       Intent intent = new Intent (this, AlarmReceiver.class);
       PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
-      alarmManager.set(AlarmManager.RTC_WAKEUP,timeToNotify,broadcast);
+      alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,broadcast); //repeats the notification daily
+
   }
 
 }
