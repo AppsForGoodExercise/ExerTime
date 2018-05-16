@@ -32,10 +32,19 @@ public class Day {
     private static final String FILE_NAME_T = "times.txt";
     FileInputStream filein_1 = null;
 
+    /**
+     *  Empty day constructor
+     */
     public Day() {
 
     }
 
+    /**
+     * Creates a day object.
+     * @param date
+     * @param listofevents
+     * @param listofexercisess
+     */
     public Day( int date, ArrayList<OurEvent> listofevents,ExerciseMasterList listofexercisess) {
 
         events = new ArrayList<OurEvent>();
@@ -102,6 +111,9 @@ public class Day {
 
     }
 
+    /**
+     * this makes the exercise list.
+     */
     public void makeExerciseList(){
         for (int r =0; r<fifteens.size();r++){
             if(fifteens.get(r).isthereanexercisehere()){
@@ -172,6 +184,10 @@ public class Day {
         }
     }
 
+    /** getexercises
+     * return an arraylist of exercises
+     * @return
+     */
     public List<ExerciseEvent> getExerciseList() {
         return daysexerices;
     }
@@ -196,11 +212,11 @@ public class Day {
     }
 
 
-
-
-
-
-
+    /** geteventstoptime
+     *  Gets an event bystop time.
+     * @param timeofbeginning
+     * @returnan Ourevent object
+     */
     public OurEvent geteventstoptime(int timeofbeginning){
         boolean checker;
         OurEvent nevent=null;
@@ -215,6 +231,12 @@ public class Day {
 
         return nevent;
     }
+
+    /**
+     * getalltheexercises
+     * Gets a stirng that is a list of all the exercises
+     * @return a list of all the exercises
+     */
     public String getalltheexercises(){
         String list="";
 
@@ -229,6 +251,12 @@ public class Day {
         }
         return list;
     }
+
+    /**
+     *
+     * @param time
+     * @return the name of the exercise
+     */
     public String getnextexercise(int time) {
         System.out.println("Getting the next Exercise");
 
@@ -236,7 +264,6 @@ public class Day {
             for (int x = 0; x < fifteens.size(); x++) {
                 if (i % 15 == 0) {
                     if (fifteens.get(x).isthereanexercisehere()) {
-                        System.out.println("I am working");
                         return fifteens.get(x).getExercise().getname();
 
                     } else return "None";
