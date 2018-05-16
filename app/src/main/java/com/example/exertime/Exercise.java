@@ -20,9 +20,9 @@ public class Exercise {
 
     }
 
-    /**
-     * 
-     * @return
+    /**Gets the name of an exercise
+     *
+     * @return the title of an exercise
      */
     public String getname(){
         return title;
