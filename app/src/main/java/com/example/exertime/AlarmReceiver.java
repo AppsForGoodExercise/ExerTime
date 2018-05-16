@@ -30,9 +30,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentTitle("ExerT!me")  //sets the title
                 .setContentText("Time to update your schedule!") //message
-                .setSmallIcon(R.mipmap.ic_launcher) //sets the icon
+                .setSmallIcon(R.mipmap.ic_launcher_round) //sets the icon
                 .setAutoCancel(true)
-                .setSmallIcon(android.R.drawable.stat_notify_error)
+                //.setSmallIcon(android.R.drawable.stat_notify_error)
                 .setVibrate(new long[]{Notification.DEFAULT_VIBRATE}) //default settings
                 .setPriority(Notification.PRIORITY_MAX); //sets the importance of notifications
 
@@ -41,6 +41,4 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.notify(0, builder.build()); //builds the notification
 
     }
-
-
 }

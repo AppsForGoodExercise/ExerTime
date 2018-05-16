@@ -32,7 +32,7 @@ public class notificationActivity extends AppCompatActivity {
 
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(notificationActivity.this)
                         .setSmallIcon(android.R.drawable.stat_notify_error)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
                         .setVibrate(new long[]{android.app.Notification.DEFAULT_VIBRATE})
                         .setPriority(android.app.Notification.PRIORITY_MAX)
                         .setContentTitle("ExerT!me")
