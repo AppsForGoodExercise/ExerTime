@@ -28,77 +28,18 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //code for popup--> https://www.youtube.com/watch?v=-mW45toHZpg
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle("ExerT!me")
-                .setContentText("Time to update your schedule!")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("ExerT!me")  //sets the title
+                .setContentText("Time to update your schedule!") //message
+                .setSmallIcon(R.mipmap.ic_launcher) //sets the icon
                 .setAutoCancel(true)
                 .setSmallIcon(android.R.drawable.stat_notify_error)
-                .setVibrate(new long[]{Notification.DEFAULT_VIBRATE})
-                .setPriority(Notification.PRIORITY_MAX);
+                .setVibrate(new long[]{Notification.DEFAULT_VIBRATE}) //default settings
+                .setPriority(Notification.PRIORITY_MAX); //sets the importance of notifications
 
-        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE);
+        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE); //notification default settings
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(0, builder.build()); //builds the notification
 
     }
 
-    //These next two methods are for getting the times for notifications
-
-    /*private Context context;
-    private static final String FILE_NAME_T = "times.txt";
-
-    ArrayList<Integer> hrInts = new ArrayList<>();
-    ArrayList<Integer> minInts = new ArrayList<>();
-
-    public void load() {
-
-        FileInputStream filein_1 = null;
-
-        try {
-            filein_1 = context.openFileInput(FILE_NAME_T);
-            InputStreamReader reader = new InputStreamReader(filein_1);
-            BufferedReader buffer = new BufferedReader(reader);
-            StringBuilder sbuilder = new StringBuilder();
-            String text;
-
-            while ((text = buffer.readLine()) != null) {
-                sbuilder.append(text).append("\n");
-            }
-
-            getTimes(sbuilder.toString());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    //parm wil be sBuilder.to String
-    //return an arraylist
-    public void getTimes(String timeStr){
-        ArrayList<String> timeStrings = new ArrayList<>();
-        String temp = "0000";
-        for(int z=0; z<(timeStr.length()/4); z++){
-            temp = timeStr.substring(z*4,(z*4)+4);
-            timeStrings.add(temp);
-        }
-
-        ArrayList<Integer> hrIntsTemp = new ArrayList<>();
-        ArrayList<Integer> minIntsTemp = new ArrayList<>();
-
-        for (int x=0; x<timeStrings.size(); x++){
-            int hr = Integer.parseInt(timeStrings.get(x).substring(0,2));
-            hrIntsTemp.add(hr);
-            int min = Integer.parseInt(timeStrings.get(x).substring(2,4));
-            minIntsTemp.add(min);
-        }
-
-        for(int y=0; y<hrIntsTemp.size(); y++){
-            hrInts.add(y,hrIntsTemp.get(y));
-            minInts.add(y,minIntsTemp.get(y));
-        }
-
-    }*/
 }
