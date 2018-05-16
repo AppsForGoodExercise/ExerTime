@@ -62,12 +62,13 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
-    private TextView mOutputText;
-    private TextView mYourSchedule;
-    private TextView mExerciseText;
-    private Button mCallApiButton;
-    ProgressDialog mProgress;
+    private TextView mOutputText; //Text box for information from Google calendar
+    private TextView mYourSchedule; //Text box that will say "Your Schedule"
+    private TextView mExerciseText; //Thext box that will show your exercise schedule
+    private Button mCallApiButton; //Generate schedule button
+    ProgressDialog mProgress; //Process box pop up that comes while the app generates the schedule
 
+    //constants for Google services
     static final int REQUEST_ACCOUNT_PICKER = 1000;
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
@@ -77,13 +78,11 @@ public class MainActivity extends AppCompatActivity
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
 
-    ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>();
-    ArrayList<fifteenminutezone> exerciseEvents = new ArrayList<fifteenminutezone>();
-    private ArrayList<String> stringData = new ArrayList<String>();
+    ArrayList<OurEvent> busyEvents = new ArrayList<OurEvent>(); //Array list of when the person is busy
+    private ArrayList<String> stringData = new ArrayList<String>(); //your exercise schedule as one string
 
-    private static final String FILE_NAME_Sc = "schedule.txt";
-    FileInputStream filein_1 = null;
-    String mainTheScText = " ";
+    private static final String FILE_NAME_Sc = "schedule.txt"; //name of file that the schedule will be saved to
+    String mainTheScText = " "; //Initializing the schedule text
 
     /**
      * Create the main activity.
@@ -92,6 +91,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Creating the layout constraints
         LinearLayout activityLayout = new LinearLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        //creating and formatting the Generate Schedule button
         mCallApiButton = new Button(this);
         mCallApiButton.setText(BUTTON_TEXT);
         mCallApiButton.setTextSize(17);
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity
         });
         activityLayout.addView(mCallApiButton);
 
+        //creating and formatting the text box for information from Google calendar
         mOutputText = new TextView(this);
         mOutputText.setLayoutParams(tlp);
         mOutputText.setPadding(16, 16, 16, 25);
@@ -127,9 +130,9 @@ public class MainActivity extends AppCompatActivity
                 "Click the \'" + BUTTON_TEXT +"\' button to generate your schedule for today.");
         mOutputText.setTextSize(17);
         mOutputText.setLineSpacing(1, 2);
-
         activityLayout.addView(mOutputText);
 
+        //creating and formatting the text box for "Your Schedule" text
         mYourSchedule = new TextView(this);
         mYourSchedule.setLayoutParams(tlp);
         mYourSchedule.setPadding(16, 30, 16, 16);
@@ -140,11 +143,7 @@ public class MainActivity extends AppCompatActivity
         mYourSchedule.setTextSize(17);
         activityLayout.addView(mYourSchedule);
 
-        //--reading and --print (most of it)
-        //--set text to stuff from text file or database
-        //read the file, if empty or first line = null(?), setText("Please press generate schedule button")
-        //if not empty, set text to thestrings from the file
-        //--Have another method for this below and call it?
+        //creating and formatting the text box for your schedule of exercises
         mExerciseText = new TextView(this);
         mExerciseText.setLayoutParams(tlp);
         mExerciseText.setPadding(16, 16, 16, 16);
@@ -156,6 +155,7 @@ public class MainActivity extends AppCompatActivity
         mExerciseText.setLineSpacing(1,2);
         activityLayout.addView(mExerciseText);
 
+        //creating
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Calling Google Calendar API ...");
 

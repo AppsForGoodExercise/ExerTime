@@ -17,7 +17,7 @@
         android:layout_marginTop="113dp"
         android:background="#FFB74D"
         android:onClick="hamburger"
-        android:padding="10dp"
+        android:padding="12dp"
         android:text="@string/scehduleButton"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
