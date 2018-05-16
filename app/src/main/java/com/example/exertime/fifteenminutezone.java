@@ -12,6 +12,13 @@ public class fifteenminutezone {
     public boolean isthereaneventhere;
     public Exercise exerewise;
 
+    /**fifteenminutezone
+     * sets up a fifteenminutezone object.
+     * @param timestart
+     * @param exercisehere
+     * @param eventhere
+     * @param g
+     */
     public  fifteenminutezone(int timestart, boolean exercisehere, boolean eventhere, Exercise g){
         timeofbeginning = timestart;
         isthereanexercise = exercisehere;
@@ -29,13 +36,18 @@ public class fifteenminutezone {
         return   isthereanexercise;
     }
 
+    /** Method that determines whether or not there is a an event at a fifteenminute time
+     * isthereanevent()
+     * @return isthereanevent
+     */
     public boolean isthereanevent(){
         return  isthereaneventhere;
     }
 
-    public int gettimestart(){
-        return timeofbeginning;
-    }
+    /** getExercise()
+     *
+     * @return exercise
+     */
     public Exercise getExercise(){
         return  exerewise;
     }
