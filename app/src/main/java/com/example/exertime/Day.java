@@ -143,7 +143,7 @@ public class Day {
                 ExerciseEvent exerEvent = new ExerciseEvent(fifteens.get(r).getExercise().getname(), (hr+":"+min+" "+ampm));
                 daysexerices.add(exerEvent);
 
-                /*ArrayList<String> listForNoti = new ArrayList<>();
+              ArrayList<String> listForNoti = new ArrayList<>();
                 listForNoti.add(hrMlt+min);
 
                 FileOutputStream fileout = null;
@@ -166,7 +166,7 @@ public class Day {
                             e.printStackTrace();
                         }
                     }
-                }*/
+                }
 
             }
         }
