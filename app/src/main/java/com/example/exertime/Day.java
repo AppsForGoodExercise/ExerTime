@@ -119,9 +119,6 @@ public class Day {
             if(fifteens.get(r).isthereanexercisehere()){
 
                 int zone = r%4;
-                String hrMlt = Integer.toString(r/4);
-                if(r/4>=0 && r/4<=9)
-                    hrMlt = "0"+hrMlt;
 
                 String hr = Integer.toString((r/4)%12);
                 if(hr.equals("0"))
@@ -154,32 +151,6 @@ public class Day {
 
                 ExerciseEvent exerEvent = new ExerciseEvent(fifteens.get(r).getExercise().getname(), (hr+":"+min+" "+ampm));
                 daysexerices.add(exerEvent);
-
-              ArrayList<String> listForNoti = new ArrayList<>();
-                listForNoti.add(hrMlt+min);
-
-                FileOutputStream fileout = null;
-
-                try {
-                    fileout = context.openFileOutput(FILE_NAME_T, MODE_PRIVATE);
-                    for(int j=0; j<listForNoti.size(); j++) {
-                        fileout.write(listForNoti.get(j).getBytes());
-                    }
-
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fileout != null) {
-                        try {
-                            fileout.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
 
             }
         }

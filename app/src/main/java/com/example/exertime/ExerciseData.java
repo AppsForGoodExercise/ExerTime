@@ -25,7 +25,7 @@ public class ExerciseData {
         List<String> Crunches = new ArrayList<String>();
         Crunches.add("Crunches: A crunch begins with lying face up on the floor with knees bent. " +
                 "The movement begins by curling the shoulders towards the pelvis. The hands can be " +
-                "behind or beside the neck or crossed over the chest");
+                "behind or beside the neck or crossed over the chest.");
 
         List<String> High_Knees = new ArrayList<String>();
         High_Knees.add("High Knees: High knees combine the typical running motion with exaggerated knee lifts. " +
@@ -35,17 +35,17 @@ public class ExerciseData {
         List<String> Tricep_Dips = new ArrayList<String>();
         Tricep_Dips.add("Tricep Dips: Straighten your arms, keeping a little bend in your elbows to " +
                 "keep tension on your triceps and off your elbow joints. Slowly bend your elbows to " +
-                "lower your body toward the floor until your elbows are at about a 90-degree angle");
+                "lower your body toward the floor until your elbows are at about a 90-degree angle.");
 
         List<String> Lunges = new ArrayList<String>();
-        Lunges.add("Lunges: Keep your upper body straight, with your shoulders back and relaxed " +
+        Lunges.add("Lunges: Keep your upper body straight, with your shoulders back and relaxed, " +
                 "and chin up (pick a point to stare at in front of you so you don't keep looking down). " +
                 "Step forward with one leg, lowering your hips until both knees are bent at " +
-                "about a 90-degree angle");
+                "about a 90-degree angle.");
 
         List<String> Jump_Squat = new ArrayList<String>();
         Jump_Squat.add("Jump Squats: Stand with your feet shoulder-width apart " +
-                "Start by doing a regular squat, then engage your core and jump up explosively " +
+                "Start by doing a regular squat, then engage your core and jump up explosively. " +
                 "When you land, lower your body back into the squat position to complete one rep. " +
                 "Land as quietly as possible, which requires control.");
 
@@ -53,7 +53,7 @@ public class ExerciseData {
         Wall_Sit.add("Wall Sits: A wall sit is an exercise done to strengthen the quadriceps muscles. " +
                 "The person wall-sitting places their back against a wall with their feet shoulder " +
                 "width apart and a little ways out from the wall. Then, keeping their back against " +
-                "the wall, they lower their hips until their knees form right angles");
+                "the wall, they lower their hips until their knees form right angles.");
 
         ExerciseDetails.put("Pushups",Jump_Squat);//Jump Squats
         ExerciseDetails.put("Squats", Lunges);//Lunges
