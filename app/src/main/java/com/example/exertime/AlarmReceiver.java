@@ -28,18 +28,17 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //code for popup--> https://www.youtube.com/watch?v=-mW45toHZpg
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle("ExerT!me")
-                .setContentText("Time to update your schedule!")
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                //.setLargeIcon(ic_launcher)
+                .setContentTitle("ExerT!me")  //sets the title
+                .setContentText("Time to update your schedule!") //message
+                .setSmallIcon(R.mipmap.ic_launcher_round) //sets the icon
                 .setAutoCancel(true)
                 //.setSmallIcon(android.R.drawable.stat_notify_error)
-                .setVibrate(new long[]{Notification.DEFAULT_VIBRATE})
-                .setPriority(Notification.PRIORITY_MAX);
+                .setVibrate(new long[]{Notification.DEFAULT_VIBRATE}) //default settings
+                .setPriority(Notification.PRIORITY_MAX); //sets the importance of notifications
 
-        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE);
+        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE); //notification default settings
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(0, builder.build()); //builds the notification
 
     }
 }

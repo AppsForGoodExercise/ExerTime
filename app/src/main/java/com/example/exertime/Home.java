@@ -47,23 +47,8 @@ public class Home extends AppCompatActivity {
         String line = "";
         ExerciseMasterList masterlists = new ExerciseMasterList();
 
-
-
-
-      /*  ArrayList<Integer> hr = new ArrayList<>();
-        ArrayList<Integer> min = new ArrayList<>();
-        for (int i=0; i<5; i++) {
-            hr.add(12);
-        }
-
-        for (int i=0; i<5; i++){
-            min.add(57+i);
-        } */
-
-        //starts the notification at the given times
+        //sets the time of the notification
         startNotification(8,30);
-
-
 
 
         try {
@@ -87,24 +72,6 @@ public class Home extends AppCompatActivity {
 
 
 
-
-
-
-        //notification button
-        //this is disconnected for now
-        // Button buttonExercise = findViewById(R.id.notify);
-        // Button buttonExercise = findViewById(R.id.notify);
-        //notification button--this is disconnected for now
-        //Button buttonExercise = findViewById(R.id.notify);
-        //notification button--this is disconnected for now
-       /* Button buttonExercise = findViewById(R.id.notify);
-       // buttonExercise.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-        //    public void onClick(View view) {
-         //       notificationpopup();
-         //   }
-       // });
-*/
 
         //profile button
         Button butprofile = findViewById(R.id.profileButton);
@@ -150,13 +117,6 @@ public class Home extends AppCompatActivity {
     }
 
 
-/*
-    //code for connecting
-    public void notificationpopup() {
-        Intent noti = new Intent(this, notificationActivity.class);
-        startActivity(noti);
-    }
-    */
 
     //connecting profile button
     public void profile() {
@@ -229,28 +189,6 @@ public class Home extends AppCompatActivity {
 
     }
 
-    //alarmManager code
-
-  /*  public void startAlarm(Calendar c){
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent broadcast = PendingIntent.getBroadcast(this,1,intent,0);
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),broadcast);
-
-        //testing
-        //setting time
-        c = (Calendar) Calendar.getInstance();
-       // c.add(Calendar.SECOND, 5);
-        c.set(Calendar.HOUR_OF_DAY,21);
-        c.set(Calendar.MINUTE,02);
-        c.set(Calendar.SECOND,00);
-        startAlarm(c);
-
-    }
-    */
 
 //notification code
   public void startNotification(int startHour, int startMinute){
@@ -260,9 +198,8 @@ public class Home extends AppCompatActivity {
 
       AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
       c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
-      long timeToNotify = c.getTimeInMillis();
-      System.out.println("Time: "+timeToNotify);
-      Intent intent = new Intent (this, AlarmReceiver.class);
+      long timeToNotify = c.getTimeInMillis(); //gets the real time
+      Intent intent = new Intent (this, AlarmReceiver.class); //connects the classes
       PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
       alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,broadcast); //repeats the notification daily
 
