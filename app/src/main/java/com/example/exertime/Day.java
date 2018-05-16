@@ -1,5 +1,6 @@
 package com.example.exertime;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -30,7 +31,6 @@ public class Day {
 
     private Context context;
     private static final String FILE_NAME_T = "times.txt";
-    FileInputStream filein_1 = null;
 
     public Day() {
 
@@ -153,6 +153,7 @@ public class Day {
                     for(int j=0; j<listForNoti.size(); j++) {
                         fileout.write(listForNoti.get(j).getBytes());
                     }
+
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
