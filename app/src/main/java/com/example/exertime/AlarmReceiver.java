@@ -44,7 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     //These next two methods are for getting the times for notifications
 
-    /*private Context context;
+    private Context context;
     private static final String FILE_NAME_T = "times.txt";
 
     ArrayList<Integer> hrInts = new ArrayList<>();
@@ -100,5 +100,5 @@ public class AlarmReceiver extends BroadcastReceiver {
             minInts.add(y,minIntsTemp.get(y));
         }
 
-    }*/
+    }
 }
