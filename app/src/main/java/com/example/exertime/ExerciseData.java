@@ -10,6 +10,7 @@ public class ExerciseData {
     {
         HashMap<String, List<String>> ExerciseDetails = new HashMap<String, List<String>>();
 
+        //Exercises and descriptions
         List<String> Pushups = new ArrayList<String>();
         Pushups.add("Pushups: A conditioning exercise performed in a prone position by raising" +
                 " and lowering the body with the straightening and bending of the arms while keeping " +
@@ -55,6 +56,7 @@ public class ExerciseData {
                 "width apart and a little ways out from the wall. Then, keeping their back against " +
                 "the wall, they lower their hips until their knees form right angles.");
 
+        //Mapping
         ExerciseDetails.put("Pushups",Jump_Squat);//Jump Squats
         ExerciseDetails.put("Squats", Lunges);//Lunges
         ExerciseDetails.put("Crunches", Tricep_Dips);//Tricep Dips

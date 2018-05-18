@@ -42,9 +42,6 @@
         <activity android:name=".NewExerciseActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".nextExercise"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
 
         <receiver android:name=".AlarmReceiver" />
     </application>

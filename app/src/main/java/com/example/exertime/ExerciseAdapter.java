@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ExerciseAdapter extends BaseExpandableListAdapter{
 
+    //Data
     private Context ctx;
     private HashMap<String, List<String>> Exercise_category;
     private List<String> Exercise_desc;
@@ -22,7 +23,11 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
     String[] intensity = {"Intensity: Medium","Intensity: Easy","Intensity: Easy","Intensity: Easy","Intensity: Medium","Intensity: Easy","Intensity: Medium","Intensity: Hard"};
     Integer [] imgid = {R.drawable.pushups,R.drawable.squats,R.drawable.crunches,R.drawable.hiknees,R.drawable.tricepdips,R.drawable.lunges,R.drawable.jumpingsquats,R.drawable.wallsit};
 
-
+    /*
+     * Construct ExerciseAdapter object
+     * @param context ctx
+     * @param Hashmap <String, List<string>, List<string>
+     */
     public ExerciseAdapter(Context ctx, HashMap<String, List<String>> Exercise_category, List<String> Exercise_desc){
 
         this.ctx = ctx;

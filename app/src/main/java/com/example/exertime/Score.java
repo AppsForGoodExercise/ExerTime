@@ -27,6 +27,9 @@ public class Score extends AppCompatActivity {
 
     // added by Rahul on 05/10/2018
 
+    /*
+     * returns the current streak from a file, increments it by one, returns, and saves that number to the file
+     */
     public void addScore(View v){
         SharedPreferences.Editor editor = getSharedPreferences(globalScoreName, MODE_PRIVATE).edit();
         SharedPreferences sharedPreferences = getSharedPreferences(this.globalScoreName, MODE_PRIVATE);
