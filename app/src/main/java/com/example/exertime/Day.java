@@ -225,7 +225,7 @@ public class Day {
     }
 
     /**
-     *
+     * getnextexercise
      * @param time
      * @return the name of the exercise
      */
@@ -268,6 +268,12 @@ public class Day {
         return nevent;
     }**/
 
+    /**
+     *  addevent adds an event
+     * @param titleofevent
+     * @param starttime
+     * @param endtime
+     */
     public void addevent(String titleofevent,int starttime, int endtime){
         OurEvent addevent= new OurEvent(starttime,endtime);
         events.add(addevent);
@@ -292,14 +298,22 @@ public class Day {
 
     }
 
-    public void fifteenminutefixers(int start, int end){
 
-    }
 
+    /**Get Date
+     * Gets the date of the project and tof the day object
+     *
+     * @return date in integer form
+     */
     public int getDate(){
         return date;
     }
 
+    /**
+     * timebetweenevents
+     * @param j an event
+     * @return the time between events
+     */
     public int timebetweenevents(int j){
         if(events.size()!=0){
 
