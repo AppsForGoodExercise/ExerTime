@@ -61,7 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addScoreButton"
-        app:srcCompat="@drawable/fire"
         android:layout_marginLeft="148dp"
         android:layout_marginRight="149dp" />
 
