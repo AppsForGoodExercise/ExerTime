@@ -7,6 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+/**
+ *  AlarmReceiver class implements a receiver and builds a notification message when an external
+ *  trigger (or alarm) is received.
+ */
+
 public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
