@@ -12,6 +12,10 @@ import java.util.List;
 public class ExerciseMasterList {
 
     ArrayList<Exercise> masterlist;
+
+    /** Exercise Master List constructor.
+     *
+     */
     public ExerciseMasterList(){
 
         masterlist = new ArrayList<Exercise>();

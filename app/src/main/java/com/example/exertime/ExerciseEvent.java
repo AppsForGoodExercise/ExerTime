@@ -16,6 +16,13 @@ public class ExerciseEvent {
     Exercise Eventexercise;
     private int dateandtime;
 
+    /**
+     * Exercise event constructor
+     * @param date
+     * @param e
+     * @param timestart
+     * @param timestop
+     */
     public ExerciseEvent(int date, Exercise e, int timestart, int timestop) {
         Eventexercise = e;
         timeofexercisestart = timestart;
@@ -23,24 +30,30 @@ public class ExerciseEvent {
         dateandtime = date;
     }
 
+    /**
+     * Other exercise Event constructor
+     * @param exerName
+     * @param timestart
+     */
     public ExerciseEvent(String exerName, String timestart){
         startTimeString = timestart;
         titleofexercise = exerName;
 
     }
 
+    /**
+     * returns the title of an exercise
+     * @return titleofexercise
+     */
     public String getTitleofExercise() {
         return titleofexercise;
     }
 
-    public int getsexercisestarttime() {
-        return timeofexercisestart;
-    }
-
-    public int gettimeofexercisestop() {
-
-        return timeofexercisestop;
-    }
+    /**
+     * getStartTimeString
+     * return the starttime of an event.
+     * @return
+     */
 
     public String getStartTimeString() { return startTimeString; }
 }

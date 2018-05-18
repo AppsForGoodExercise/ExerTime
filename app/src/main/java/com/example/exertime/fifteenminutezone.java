@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * Created by robertclark on 4/17/18.
  */
 
+
 public class fifteenminutezone {
     ArrayList<OurEvent> listofevents = new ArrayList<OurEvent>();
     public int timeofbeginning;
@@ -32,6 +33,10 @@ public class fifteenminutezone {
         isthereanexercise  = r;
     }
 
+    /**isthereanexercise
+     * states whether or not there is an exercise n a particular spot.
+     * @return isthereanexercise
+     */
     public boolean isthereanexercisehere(){
         return   isthereanexercise;
     }
@@ -52,11 +57,18 @@ public class fifteenminutezone {
         return  exerewise;
     }
 
+    /**setexercise
+     * sets an exercise.
+     * @param r
+     */
     public void setexercise(Exercise r){
         exerewise  = r;
     }
 
-
+    /**setevent
+     * sets the boolean if an exercise
+     * @param r
+     */
     public void setevent(boolean r){
         isthereaneventhere  = r;
     }
