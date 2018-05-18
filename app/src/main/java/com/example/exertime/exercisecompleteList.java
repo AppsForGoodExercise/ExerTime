@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *  exercisecompletelist class builds the Exercise List hierarchical view which displays a list of all
+ *  the exercises (along with images) and when a particular exercise is clicked, a description of
+ *  the exercise is displayed in the view in a hierarchical fashion.
+ */
+
 public class exercisecompleteList extends AppCompatActivity {
 
     HashMap<String, List<String>> Exercise_category;

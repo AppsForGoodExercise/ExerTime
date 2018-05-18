@@ -16,6 +16,12 @@ import java.io.InputStreamReader;
 
 import android.widget.EditText;
 
+/**
+ *  The Profile class implements the Profile View where the Name and the Goal of the User is entered,
+ *  which can then be saved for future retrieval.
+ *
+ */
+
 public class Profile extends AppCompatActivity {
     private static final String FILE_NAME_1 = "name.txt";
     private static final String FILE_NAME_2 = "goal.txt";
@@ -39,6 +45,11 @@ public class Profile extends AppCompatActivity {
         load();
 
     }
+
+    /**
+     * Save the Name and Goal of the Exerciser into a text file for future retrieval.
+     * @param v the current Profile view
+     */
 
     public void save(View v) {
 
@@ -76,6 +87,10 @@ public class Profile extends AppCompatActivity {
 
     }
 
+    /**
+     * Load the Name and Goal values of User from the saved files onto the Profile View.
+     *
+     */
 
     public void load() {
 

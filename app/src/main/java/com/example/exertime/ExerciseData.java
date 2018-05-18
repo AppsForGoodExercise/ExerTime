@@ -4,7 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *  The ExerciseData class implements the getInfo() method where all the exercises and the descriptions
+ *  of the exercises are captured.
+ */
+
 public class ExerciseData {
+
+    /**
+     * Returns the list of all the exercises and their associated descriptions.
+     * @return a HashMap of the list of exercises and descriptions.
+     */
 
     public static HashMap<String, List<String>> getInfo()
     {
