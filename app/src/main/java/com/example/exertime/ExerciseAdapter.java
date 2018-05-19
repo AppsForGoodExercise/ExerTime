@@ -22,7 +22,13 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
     String[] intensity = {"Intensity: Medium","Intensity: Easy","Intensity: Easy","Intensity: Easy","Intensity: Medium","Intensity: Easy","Intensity: Medium","Intensity: Hard"};
     Integer [] imgid = {R.drawable.pushups,R.drawable.squats,R.drawable.crunches,R.drawable.hiknees,R.drawable.tricepdips,R.drawable.lunges,R.drawable.jumpingsquats,R.drawable.wallsit};
 
-
+    /**
+     * ExerciseAdapter Class provides the layout of the hierarchical Exercise List view (both parent
+     * and child Views). All the 10 methods are provided.
+     * @param ctx Context
+     * @param Exercise_category Exercise type
+     * @param Exercise_desc     Exercise description
+     */
     public ExerciseAdapter(Context ctx, HashMap<String, List<String>> Exercise_category, List<String> Exercise_desc){
 
         this.ctx = ctx;
@@ -30,44 +36,87 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
         this.Exercise_desc = Exercise_desc;
     }
 
+    /**
+     * This method returns the number of exercises.
+     * @return exercise number
+     */
     @Override
     public int getGroupCount() {
 
         return Exercise_category.size();
     }
 
+    /**
+     *  This method returns the description of the specified exercise type
+     * @param i index of the exercise type
+     * @return count of the children of the specified exercise type
+     */
     @Override
     public int getChildrenCount(int i) {
 
         return Exercise_category.get(Exercise_desc.get(i)).size();
     }
 
+    /**
+     *  This method returns the name of exercise type
+     * @param i index of the exercise type
+     * @return name of the exercise
+     */
     @Override
     public Object getGroup(int i) {
         return Exercise_category.get(i);
     }
 
+    /**
+     * This method returns the child object referenced by the exercise type
+     * @param parent index of the exercise type
+     * @param child Child object
+     * @return
+     */
     @Override
     public Object getChild(int parent, int child) {
 
         return Exercise_category.get(Exercise_desc.get(parent)).get(child);
     }
 
+    /**
+     *  This method returns index of the exercise type
+     * @param i index of exercise type
+     * @return index of exercise type
+     */
     @Override
     public long getGroupId(int i) {
         return i;
     }
 
+    /**
+     * This method returns the id of the child of the exercise type
+     * @param parent index of the exercise type
+     * @param child index of child
+     * @return ID of child
+     */
     @Override
     public long getChildId(int parent, int child) {
         return child;
     }
 
+    /**
+     * This method returns false
+     * @return false
+     */
     @Override
     public boolean hasStableIds() {
         return false;
     }
 
+    /**
+     * This method returns the View that displays the list of all exercise types
+     * @param parent index of the parent
+     * @param isExpanded boolean variable that describes if the View is expanded or not
+     * @param convertview Returned View
+     * @param parentview Parent View
+     * @return View that shows the intensity and list of all exercise types
+     */
     @Override
     public View getGroupView(int parent, boolean isExpanded, View convertview, ViewGroup parentview) {
 
@@ -93,6 +142,15 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
 
     }
 
+    /**
+     *  This method returns the Child or expanded view of all the exercises.
+     * @param parent index of the parent
+     * @param child index of the child
+     * @param lastChild Boolean whether this is the last child or not
+     * @param convertview View that is returned
+     * @param parentview parent View
+     * @return View that shows the expanded view of all the exercises which includes the descriptions.
+     */
     @Override
     public View getChildView(int parent, int child, boolean lastChild, View convertview, ViewGroup parentview) {
 
@@ -108,10 +166,20 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
         return convertview;
     }
 
+    /**
+     * Returns if the child is selectable
+     * @param i index of parent
+     * @param i1 index of child
+     * @return false
+     */
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return false;
     }
+
+    /**
+     *  This class holds the exercise name, exercise intensity and image of the exercise. 
+     */
 
     class ViewHolder
     {
