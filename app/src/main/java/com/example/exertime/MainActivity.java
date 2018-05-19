@@ -2,6 +2,7 @@ package com.example.exertime;
 
 /**
  * Created by snowk on 5/4/2018.
+ * Code taken and modified from Google Developers
  */
 
 import com.google.android.gms.common.ConnectionResult;
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
 
+        //returns the exercise schedule from file
         getListFromFile();
     }
 
@@ -403,8 +405,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         /**
-         * Fetch a list of the next 10 events from the primary calendar.
-         * @return List of Strings describing returned events.
+         * Fetch a list of events between now (when the button is pressed)
+         * and midnight that day from the primary calendar.
+         * @return List of Strings describing returned events (in 12 hour format)
          * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
@@ -473,7 +476,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
+        //Text shown while the app goes into the calender and generates the schedule
         @Override
         protected void onPreExecute() {
             mOutputText.setText("");
@@ -482,6 +485,7 @@ public class MainActivity extends AppCompatActivity
             mYourSchedule.setText("");
         }
 
+        //Text shown after generation
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
@@ -494,13 +498,12 @@ public class MainActivity extends AppCompatActivity
 
             mYourSchedule.setText("Your Exercise Schedule:");
 
-            //--print (straight from button)
-            //--set mOutputText3 to getListofEvents (print each value)
-
+            //makes and returns the exercises events
             makeListofEvents();
 
         }
 
+        //Catching errors
         @Override
         protected void onCancelled() {
             mProgress.hide();
@@ -523,6 +526,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //makes the list of OurEvent objects of the user's scheduled events from the calendar.
     public void makeBusyEvents(List<Integer> eventInts){
         int start = 0000;
         int stop = 0000;
@@ -548,10 +552,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //returns list of OurEvent objects of the user's scheduled events from the calendar
     public List<OurEvent> getBusyEvents(){
         return busyEvents;
     }
 
+    /*makes the exercise schedule from the user's google events and creates a string for the
+    schedule with each time in 12-hour format
+    */
     public void makeListofEvents(){
 
         Date g = java.util.Calendar.getInstance().getTime();
@@ -568,7 +576,7 @@ public class MainActivity extends AppCompatActivity
         String p = calendar.get(java.util.Calendar.DAY_OF_MONTH)+""+calendar.get(java.util.Calendar.MONTH)+""+calendar.get(java.util.Calendar.YEAR);
         int y = calendar.get(java.util.Calendar.MINUTE);
         int numberday = Integer.parseInt(p);
-        //Robert's Code
+
         InputStream is = (InputStream) getResources().openRawResource(R.raw.exerciselist);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
@@ -609,6 +617,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //saves the exercise schedule (as one string) to a file
     public void save(){
         FileOutputStream fileout = null;
 
@@ -631,6 +640,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //returns the exercise schedule (as one string) from a file
     public void getListFromFile(){
         FileInputStream filein_1 = null;
 

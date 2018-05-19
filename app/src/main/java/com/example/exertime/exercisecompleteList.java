@@ -35,10 +35,5 @@ public class exercisecompleteList extends AppCompatActivity {
         adapter = new ExerciseAdapter(this, Exercise_category, Exercise_desc);
         Exp_list.setAdapter(adapter);
 
-         //     Resources res = getResources();
-        //      exerciseListView = (ListView) findViewById(R.id.exerciseListView);
-        //       exerciseName = res.getStringArray(R.array.exerciseName);
-         //  CustomListView customListView = new CustomListView(this, exerciseName, intensity, imgid);
-         //    exerciseListView.setAdapter(customListView);
     }
 }

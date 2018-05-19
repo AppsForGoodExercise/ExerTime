@@ -1,21 +1,8 @@
 package com.example.exertime;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static android.content.Context.MODE_PRIVATE;
-import static android.widget.Toast.*;
-import android.content.Context;
 
 /**
  * Created by robertclark on 3/28/18.
@@ -23,17 +10,12 @@ import android.content.Context;
 
 public class Day {
     public List<OurEvent> events;
-    public int size;
     public int date;
-    public List<Exercise> masterlist;
     public List<fifteenminutezone> fifteens = new ArrayList<fifteenminutezone>();
     List<ExerciseEvent> daysexerices = new ArrayList<ExerciseEvent>();
 
-    private Context context;
-    private static final String FILE_NAME_T = "times.txt";
-
     /**
-     *  Empty day constructor
+     *  Empty day constructor (default)
      */
     public Day() {
 
@@ -112,7 +94,9 @@ public class Day {
     }
 
     /**
-     * this makes the exercise list.
+     * This makes the exercise list.
+     * Exercises are added to an exercise list "daysexercises" as ExerciseEvents.
+     * Added with the time as a string giving the 12 hour time.
      */
     public void makeExerciseList(){
         for (int r =0; r<fifteens.size();r++){
@@ -158,14 +142,10 @@ public class Day {
 
     /** getexercises
      * return an arraylist of exercises
-     * @return
+     * @return arraylist of ExerciseEvents
      */
     public List<ExerciseEvent> getExerciseList() {
         return daysexerices;
-    }
-
-    public OurEvent geteventlocation(int location){
-        return events.get(location);
     }
 
     public OurEvent geteventstartime(int timeofbeginning){
@@ -247,26 +227,6 @@ public class Day {
     }
 
 
-
-
-
-
-
-
-    /**public OurEvent geteventtitle(String titleofevent){
-        boolean checker;
-        OurEvent nevent=null;
-        for( int i = 0; i<=events.size(); i++ ) {
-            if(titleofevent.equals(events.get(i).getTitleofEvent())){
-                checker = true;
-                nevent = events.get(i);
-                break;
-            }
-
-        }
-
-        return nevent;
-    }**/
 
     /**
      *  addevent adds an event

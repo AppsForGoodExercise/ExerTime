@@ -125,7 +125,7 @@ public class Home extends AppCompatActivity {
 
     }
 
-    //next exercise
+    //gets information before going to the next_exercise/schedule page
     public void nextExercise() {
         Intent exer = new Intent(this, MainActivity.class);
         Log.d("MainActivity", "hi " );
@@ -140,129 +140,40 @@ public class Home extends AppCompatActivity {
 
         int time = x*60+y;
 
-        Log.d("Home", "before answer string");
         //problem:
         String  answer = ""+day.getalltheexercises()+"";
-        Log.d("Home", "after answer string");
 
         exer.putExtra("NameofExercise", answer);
 
         startActivity(exer);
     }
 
+    //goes to streak/score page
     public void todayscore() {
         Intent tod = new Intent(this, Score.class);
         startActivity(tod); //connects with two pages
     }
 
+    //goes to exercise list page
     public void exerciseList() {
         Intent exerList= new Intent(this, exercisecompleteList.class);
         startActivity(exerList); //connects the pages
     }
 
 
+    //notification code
+      public void startNotification(int startHour, int startMinute){
+          Calendar c = Calendar.getInstance(); //gets date
+          long rightNow = c.getTimeInMillis(); //gets the time
+          Log.d("noti",String.valueOf(rightNow)); //real time
 
-    public void hamburger (View V){
-        Log.e("MainActivity", "hi " );
+          AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+          c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
+          long timeToNotify = c.getTimeInMillis(); //gets the real time
+          Intent intent = new Intent (this, AlarmReceiver.class); //connects the classes
+          PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,broadcast); //repeats the notification daily
 
-        System.out.println("HEYYEAG");
-        Date date = new Date();   // given date
-        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-        calendar.setTime(date);   // assigns calendar to given date
-
-
-
-        int x = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
-        calendar.get(Calendar.HOUR);        // gets hour in 12h format
-        calendar.get(Calendar.MONTH);
-        int y = calendar.get(Calendar.MINUTE);
-
-        int time = x*60+y;
-
-        String  answer = ""+day.getalltheexercises()+"";
-
-
-        Intent intent = new Intent(this, NewExerciseActivity.class);
-
-        intent.putExtra("Hi", answer);
-        startActivity(intent);
-
-    }
-
-
-//notification code
-  public void startNotification(int startHour, int startMinute){
-      Calendar c = Calendar.getInstance(); //gets date
-      long rightNow = c.getTimeInMillis(); //gets the time
-      Log.d("noti",String.valueOf(rightNow)); //real time
-
-      AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-      c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),startHour,startMinute,0);
-      long timeToNotify = c.getTimeInMillis(); //gets the real time
-      Intent intent = new Intent (this, AlarmReceiver.class); //connects the classes
-      PendingIntent broadcast = PendingIntent.getBroadcast(this,0,intent,0);
-      alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,broadcast); //repeats the notification daily
-
-  }
-
-    //These next two methods are for getting the times for notifications
-
-    /*private Context context;
-    private static final String FILE_NAME_T = "times.txt";
-
-    ArrayList<Integer> hrInts = new ArrayList<>();
-    ArrayList<Integer> minInts = new ArrayList<>();
-
-    public void load() {
-
-        FileInputStream filein_1 = null;
-
-        try {
-            filein_1 = context.openFileInput(FILE_NAME_T);
-            InputStreamReader reader = new InputStreamReader(filein_1);
-            BufferedReader buffer = new BufferedReader(reader);
-            StringBuilder sbuilder = new StringBuilder();
-            String text;
-
-            while ((text = buffer.readLine()) != null) {
-                sbuilder.append(text).append("\n");
-            }
-
-            getTimes(sbuilder.toString());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    //parm wil be sBuilder.to String
-    //return an arraylist
-    public void getTimes(String timeStr){
-        ArrayList<String> timeStrings = new ArrayList<>();
-        String temp = "0000";
-        for(int z=0; z<(timeStr.length()/4); z++){
-            temp = timeStr.substring(z*4,(z*4)+4);
-            timeStrings.add(temp);
-        }
-
-        ArrayList<Integer> hrIntsTemp = new ArrayList<>();
-        ArrayList<Integer> minIntsTemp = new ArrayList<>();
-
-        for (int x=0; x<timeStrings.size(); x++){
-            int hr = Integer.parseInt(timeStrings.get(x).substring(0,2));
-            hrIntsTemp.add(hr);
-            int min = Integer.parseInt(timeStrings.get(x).substring(2,4));
-            minIntsTemp.add(min);
-        }
-
-        for(int y=0; y<hrIntsTemp.size(); y++){
-            hrInts.add(y,hrIntsTemp.get(y));
-            minInts.add(y,minIntsTemp.get(y));
-        }
-
-    }*/
+      }
 
 }

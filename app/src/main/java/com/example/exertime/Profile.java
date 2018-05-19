@@ -23,14 +23,15 @@ import android.widget.EditText;
  */
 
 public class Profile extends AppCompatActivity {
+    //files to save to
     private static final String FILE_NAME_1 = "name.txt";
     private static final String FILE_NAME_2 = "goal.txt";
 
-    FileInputStream filein_1 = null;
-    FileInputStream filein_2 = null;
-
+    //edit text boxes (user input)
     EditText mName;
     EditText mGoal;
+
+    //Button (for save)
     Button button;
 
     @Override
@@ -38,10 +39,12 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //find text boxes and button in xml and assign to variables
         button = (Button) findViewById(R.id.profileButton);
         mName = findViewById(R.id.enterName);
         mGoal = findViewById(R.id.enterGoal);
 
+        //load profile information from file
         load();
 
     }
@@ -64,9 +67,6 @@ public class Profile extends AppCompatActivity {
             fileout = openFileOutput(FILE_NAME_2, MODE_PRIVATE);
             fileout.write(Goaltext.getBytes());
 
-            mName.getText().clear();
-            mGoal.getText().clear();
-
             Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
 
         } catch (FileNotFoundException e) {
@@ -83,12 +83,10 @@ public class Profile extends AppCompatActivity {
             }
         }
 
-        load();
-
     }
 
     /**
-     * Load the Name and Goal values of User from the saved files onto the Profile View.
+     * returns the Name and Goal values of User from the saved files onto the Profile View.
      *
      */
 

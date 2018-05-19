@@ -50,7 +50,7 @@ public class fifteenminutezone {
     }
 
     /** getExercise()
-     *
+     * returns the exercise object in this zone
      * @return exercise
      */
     public Exercise getExercise(){

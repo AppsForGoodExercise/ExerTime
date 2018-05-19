@@ -22,7 +22,9 @@ public class notificationActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.notifyButton);
 
-
+        /*on the click of the button, return a notification saying
+         * "Exert!me" "Time to exercise" with the launcher icon (round)
+         */
         button.setOnClickListener(new View.OnClickListener()
 
         {
